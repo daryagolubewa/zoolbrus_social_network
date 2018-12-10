@@ -1,0 +1,44 @@
+.app {
+    &__header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__menu {
+        margin-top: 10px;
+    }
+
+    &__button-block {
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+
+    &__button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+
+        &_green {
+            background-color: #4CAF50;
+        }
+
+        &_blue {
+            background-color: blue;
+        }
+
+        &_red {
+            background-color: darkred;
+        }
+
+        &_yellow {
+            background-color: yellow;
+            color: black;
+        }
+    }
+}
