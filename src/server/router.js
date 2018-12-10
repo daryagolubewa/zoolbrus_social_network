@@ -1,4 +1,10 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import User from './models/user';
+import Post from './models/post';
+import Message from './models/message';
+
+mongoose.connect('mongodb://localhost/reagram');
 
 const router = express.Router();
 
