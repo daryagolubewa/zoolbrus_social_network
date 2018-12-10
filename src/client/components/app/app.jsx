@@ -105,6 +105,11 @@ export default class App extends Component {
                 <Row>
                     <Col xs={4} lg={12} md={8} className='main-container'>
                         <Nav bsStyle="pills" className='menu'>
+                            <Link to={PAGES.home.path}>
+                                <div className='menu-text'>
+                                    На главную
+                                </div>
+                            </Link>
                             <Link to={PAGES.users.teachers.path}>
                                 <div className='menu-text'>
                                     Наши преподаватели

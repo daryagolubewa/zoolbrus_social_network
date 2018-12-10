@@ -6,10 +6,11 @@ import App from '../components/app/app';
 import HomePage from '../components/home-page/home-page';
 import InfoPage from '../components/info-page/info-page';
 import Page404 from '../components/page404/page404';
-import Login from '../components/login-page/login-page';
+// import Login from '../components/login-page/login-page';
 import StudentsPage from '../components/students-page/students-page';
 import TeachersPage from '../components/teachers-page/teachers-page';
 import FeedbackPage from '../components/feedback-page/feedback-page';
+// import SignupPage from '../components/signup-page/signup-page';
 
 
 const WrappedApp = (Component, props) => (
@@ -32,14 +33,10 @@ export default () => (
             exact path={PAGES.page404.path}
             render={props => WrappedApp(Page404, props)}
         />
-        <Route
-            exact path={PAGES.signup.path}
-            render={props => WrappedApp(Login, props)}
-        />
-        <Route
-            exact path={PAGES.signin.path}
-            render={props => WrappedApp(Login, props)}
-        />
+        {/* <Route */}
+            {/* exact path={PAGES.signup.path} */}
+            {/* render={props => WrappedApp(SignupPage, props)} */}
+        {/* /> */}
         <Route
             exact path={PAGES.users.teachers.path}
             render={props => WrappedApp(TeachersPage, props)}
