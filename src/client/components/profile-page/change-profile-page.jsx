@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import './profile-page.css';
 import {
-  Button, FormGroup, ControlLabel, HelpBlock, FormControl, Checkbox, Radio
+  Button,
+  FormGroup,
+  ControlLabel,
+  HelpBlock,
+  FormControl
 } from 'react-bootstrap';
+import Type from 'prop-types';
+
 
 function FieldGroup({
   id, label, help, ...props
@@ -18,90 +24,48 @@ function FieldGroup({
 
 
 export default class FormProfilePage extends Component {
-  render() {
-    return (
-        <form>
-            <FieldGroup
-                id="formControlsText"
-                type="text"
-                label="Text"
-                placeholder="Enter text"
-            />
+    static propTypes = {
+      discription: Type.string,
+      work: Type.string,
+      links: Type.array
+    };
 
-            <FieldGroup
-                id="formControlsEmail"
-                type="email"
-                label="Email address"
-                placeholder="Enter email"
-            />
+    state = {
+      work: 'FaceBook'
+    }
 
-            <FieldGroup
-                id="formControlsPassword"
-                label="Password"
-                type="password" />
+    render() {
+      const {
+        discription,
+        work
+      } = this.props;
+      return (
+            <form>
+                <FieldGroup
+                    id="formControlsFile"
+                    type="file"
+                    label="Аватарка"
+                    help="Выберите аватарку"
+                />
 
-            <FieldGroup
-                id="formControlsFile"
-                type="file"
-                label="File"
-                help="Example block-level help text here."
-            />
+                <FormGroup controlId="formControlsTextarea">
+                    <ControlLabel>Места работы</ControlLabel>
+                    <FormControl componentClass="textarea"
+                    placeholder="Введите ваши места работы"
+                    defaultValue={work}
+                    // onChange={ (e)=>{ this.setState({work: e.target.value }) }}
+                    />
+                </FormGroup>
 
-            <Checkbox checked readOnly>
-                Checkbox
-            </Checkbox>
+                <FormGroup controlId="formControlsTextarea">
+                    <ControlLabel>О себе</ControlLabel>
+                    <FormControl componentClass="textarea"
+                    placeholder="Введите информацию о себе"
+                    defaultValue={discription}/>
+                </FormGroup>
 
-            <Radio checked readOnly>
-                Radio
-            </Radio>
-
-            <FormGroup>
-                <Checkbox inline>1</Checkbox>
-                <Checkbox inline>2</Checkbox>{' '}
-                <Checkbox inline>3</Checkbox>
-            </FormGroup>
-
-            <FormGroup>
-                <Radio name="radioGroup" inline>
-                    1
-                </Radio>{' '}
-                <Radio name="radioGroup" inline>
-                    2
-                </Radio>{' '}
-                <Radio name="radioGroup" inline>
-                    3
-                </Radio>
-            </FormGroup>
-
-            <FormGroup controlId="formControlsSelect">
-                <ControlLabel>Select</ControlLabel>
-                <FormControl componentClass="select" placeholder="select">
-                    <option value="select">select</option>
-                    <option value="other">...</option>
-                </FormControl>
-            </FormGroup>
-
-            <FormGroup controlId="formControlsSelectMultiple">
-                <ControlLabel>Multiple select</ControlLabel>
-                <FormControl componentClass="select" multiple>
-                    <option value="select">select (multiple)</option>
-                    <option value="other">...</option>
-                </FormControl>
-            </FormGroup>
-
-            <FormGroup controlId="formControlsTextarea">
-                <ControlLabel>Textarea</ControlLabel>
-                <FormControl componentClass="textarea"
-                placeholder="textarea" />
-            </FormGroup>
-
-            <FormGroup>
-                <ControlLabel>Static text</ControlLabel>
-                <FormControl.Static>email@example.com</FormControl.Static>
-            </FormGroup>
-
-            <Button type="submit">Submit</Button>
-        </form>
-    );
-  }
+                <Button type="submit">Сохранить изменения</Button>
+            </form>
+      );
+    }
 }

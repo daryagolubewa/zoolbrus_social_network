@@ -17,9 +17,9 @@ export const PAGES = {
       path: '/users/students'
     }
   },
-  signin: {
-    name: 'signin',
-    path: '/signin'
+  login: {
+    name: 'login',
+    path: '/login'
   },
   signup: {
     name: 'signup',
