@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "bootstrap": "^3.3.7",
     "connected-react-router": "^5.0.1",
     "express": "^4.16.4",
     "express-winston": "^3.0.1",
