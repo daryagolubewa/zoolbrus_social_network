@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import {
-  Button, Col, Row, Grid, Navbar, Nav, NavItem, NavDropdown, MenuItem
+  Button, Col, Row, Grid
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -64,71 +64,80 @@ class App extends Component {
     } = this.props;
     // console.log(this.props);
     return (
-      <div>
-        <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <a href="#" onClick={this.handleOpenPage(PAGES.home.path)}>Zoolbrus</a>
-            </Navbar.Brand>
-          </Navbar.Header>
-          <Nav>
-            <NavItem eventKey={1} href="#" onClick={this.handleOpenPage(PAGES.users.teachers.path)}>
-              Наши преподаватели
-            </NavItem>
-            <NavItem eventKey={2} href="#">
-              Link
-            </NavItem>
-            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Action</MenuItem>
-              <MenuItem eventKey={3.2}>Another action</MenuItem>
-              <MenuItem eventKey={3.3}>Something else here</MenuItem>
-              <MenuItem divider/>
-              <MenuItem eventKey={3.4}>Separated link</MenuItem>
-            </NavDropdown>
-          </Nav>
-        </Navbar>
+
         <div className='container-fluid'>
           <Grid>
             <Row>
-              <Col xs={4} xsOffset={4} lg={4} lgOffset={9} md={8} mdOffset={8}>
-                <div className='button-toolbar'>
+              <Col xs={4} lg={12} md={8} className='main-menu'>
+                <div className='button-toolbar toolbar-links'>
+                  <Link to={PAGES.home.path}>
+                    <div className='menu-text'>
+                      На главную
+                    </div>
+                  </Link>
+                  <Link to={PAGES.users.teachers.path}>
+                    <div className='menu-text'>
+                      Наши преподаватели
+                    </div>
+                  </Link>
+                  <Link to={PAGES.users.students.path}>
+                    <div className='menu-text'>
+                      Наши студенты
+                    </div>
+                  </Link>
+                  <Link to={PAGES.about.path}>
+                    <div className='menu-text'>
+                      О нас
+                    </div>
+                  </Link>
+                  <Link to={PAGES.feedback.path}>
+                    <div className='menu-text'>
+                      Задать вопрос
+                    </div>
+                  </Link>
+                </div>
+                <div className='button-toolbar enter-buttons'>
                   <Link to={PAGES.signup.path}>
                     <Button className='form-buttons' bsStyle='primary'>Зарегистрироваться</Button>
                   </Link>
-                  <Link to={PAGES.signin.path}>
+                  <Link to={PAGES.login.path}>
                     <Button className='form-buttons' bsStyle='primary'>Войти</Button>
                   </Link>
                 </div>
               </Col>
-            </Row>
-            <Row>
-              <Col xs={4} lg={12} md={8} className='main-container'>
-                <Link to={PAGES.users.teachers.path}>
-                  <div className='menu-text'>
-                    Наши преподаватели
-                  </div>
-                </Link>
-                <Link to={PAGES.users.students.path}>
-                  <div className='menu-text'>
-                    Наши студенты
-                  </div>
-                </Link>
-                <Link to={PAGES.about.path}>
-                  <div className='menu-text'>
-                    О нас
-                  </div>
-                </Link>
-                <Link to={PAGES.feedback.path}>
-                  <div className='menu-text'>
-                    Задать вопрос
-                  </div>
-                </Link>
-              </Col>
+              {/* <Col xs={4} lg={12} md={8} className='button-toolbar'> */}
+                {/* <div className='button-toolbar'> */}
+                {/* <Link to={PAGES.home.path}> */}
+                  {/* <div className='menu-text'> */}
+                    {/* На главную */}
+                  {/* </div> */}
+                {/* </Link> */}
+                {/* <Link to={PAGES.users.teachers.path}> */}
+                  {/* <div className='menu-text'> */}
+                    {/* Наши преподаватели */}
+                  {/* </div> */}
+                {/* </Link> */}
+                {/* <Link to={PAGES.users.students.path}> */}
+                  {/* <div className='menu-text'> */}
+                    {/* Наши студенты */}
+                  {/* </div> */}
+                {/* </Link> */}
+                {/* <Link to={PAGES.about.path}> */}
+                  {/* <div className='menu-text'> */}
+                    {/* О нас */}
+                  {/* </div> */}
+                {/* </Link> */}
+                {/* <Link to={PAGES.feedback.path}> */}
+                  {/* <div className='menu-text'> */}
+                    {/* Задать вопрос */}
+                  {/* </div> */}
+                {/* </Link> */}
+                {/* </div> */}
+              {/* </Col> */}
             </Row>
             {children}
           </Grid>
         </div>
-      </div>
     );
   }
 }
