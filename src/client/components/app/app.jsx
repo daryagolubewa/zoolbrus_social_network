@@ -105,35 +105,6 @@ class App extends Component {
                   </Link>
                 </div>
               </Col>
-              {/* <Col xs={4} lg={12} md={8} className='button-toolbar'> */}
-                {/* <div className='button-toolbar'> */}
-                {/* <Link to={PAGES.home.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* На главную */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* <Link to={PAGES.users.teachers.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* Наши преподаватели */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* <Link to={PAGES.users.students.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* Наши студенты */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* <Link to={PAGES.about.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* О нас */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* <Link to={PAGES.feedback.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* Задать вопрос */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* </div> */}
-              {/* </Col> */}
             </Row>
             {children}
           </Grid>

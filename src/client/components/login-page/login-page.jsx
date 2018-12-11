@@ -75,7 +75,7 @@ export default class LoginPage extends Component {
         <Col className='login-page'>
         <Form horizontal>
             <ControlLabel>Войти на сайт</ControlLabel>
-            <FormGroup controlId="formHorizontalEmail" className="form-info">
+            <FormGroup className="form-info">
                 <Col lg={2}>
                     Email
                 </Col>
@@ -84,7 +84,7 @@ export default class LoginPage extends Component {
                 </Col>
             </FormGroup>
 
-            <FormGroup controlId="formHorizontalPassword">
+            <FormGroup >
                 <Col sm={2}>
                     Password
                 </Col>
