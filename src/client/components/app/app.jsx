@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   Button, Col, Row, Grid, Navbar, Nav, NavItem, NavDropdown, MenuItem
 } from 'react-bootstrap';
@@ -19,6 +20,8 @@ import { PAGES } from '../../routes/pages';
 // import { selectUser, selectIsUserFetching } from '../../redux/selectors/user-selectors';
 // import { selectPosts, selectIsPostsFetching } from '../../redux/selectors/post-selectors';
 import './app.css';
+// import ProfilePage from '../profile-page/profile-page';
+
 
 // const cn = bemClassNameFactory('app');
 //
@@ -29,11 +32,13 @@ import './app.css';
 //   isUserFetching: selectIsUserFetching(state),
 //   posts: selectPosts(state),
 //   isPostsFetching: selectIsPostsFetching(state)
+
 // });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   doRoute: push
 }, dispatch);
+
 
 class App extends Component {
   static propTypes = {
