@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './profile-page.css';
-import {
-  Button, Modal
-} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import FormProfilePage from './change-profile-page';
 import avatar from '../../public/images/noavatar.png';
 

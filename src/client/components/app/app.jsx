@@ -16,7 +16,7 @@ import { bemClassNameFactory } from '../../utils/bem';
 // import { selectUser, selectIsUserFetching } from '../../redux/selectors/user-selectors';
 // import { selectPosts, selectIsPostsFetching } from '../../redux/selectors/post-selectors';
 import './app.css';
-import ProfilePage from '../profile-page/profile-page';
+// import ProfilePage from '../profile-page/profile-page';
 
 const cn = bemClassNameFactory('app');
 
@@ -146,7 +146,7 @@ export default class App extends Component {
         { children }
         <div className={ cn('footer') }>
         </div> */}
-        <ProfilePage/>
+        {/* <ProfilePage/> */}
       </div>
 
     );
