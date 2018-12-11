@@ -4,9 +4,18 @@
    flex-direction: row;
 }
 
+.enter-buttons {
+   margin: 15px 0px 0px 0px;
+}
 
 .form-buttons {
    margin: 4px;
+}
+
+.main-menu {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
 }
 
 .menu {
@@ -16,4 +25,8 @@
 
 .menu-text {
    margin: 0px 10px 0px 0px;
+}
+
+.toolbar-links {
+   align-items: center;
 }
