@@ -1,0 +1,45 @@
+.profile-page {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.avatar {
+    width: 200px;
+}
+
+.name { 
+    margin-left: 50px;
+}
+
+.content {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.role {
+    display: flex;
+    /* flex-direction: column; */
+    /* flex-wrap: wrap */
+}
+
+.isRole {
+    margin-left: 20px;
+    width: 500px;
+}
+
+.whatRole {
+    width: 170px;
+}
+
+.sidebar {
+    flex-flow: row wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttonSend {
+    margin-top: 20px;
+    margin-left: 13px
+}

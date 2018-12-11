@@ -12,12 +12,7 @@ import Routes from './routes/routes';
 const history = createBrowserHistory();
 const composeEnhancers = composeWithDevTools({});
 
-const initialState = {
-  app: {
-    name: 'Express React Skeleton',
-    say: 'nothing for now'
-  }
-};
+const initialState = {};
 
 const store = createStore(
   reducers(history),
