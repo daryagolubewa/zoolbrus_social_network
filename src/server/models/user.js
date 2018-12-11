@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  nickname: String,
+  name: String,
+  email: String,
   password: String,
   role: String,
   company: String,
-  phone: Number,
   groupName: String,
   links: Array,
   messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }]

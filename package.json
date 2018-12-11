@@ -26,6 +26,7 @@
     "start": "node start.js"
   },
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "connected-react-router": "^5.0.1",
     "express": "^4.16.4",
