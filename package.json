@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "bootstrap": "^3.3.7",
     "connected-react-router": "^5.0.1",
     "express": "^4.16.4",
     "express-winston": "^3.0.1",
@@ -35,6 +34,7 @@
     "history": "^4.7.2",
     "http-proxy-middleware": "^0.19.0",
     "prop-types": "^15.6.2",
+
     "react": "^16.7.0-alpha.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0-alpha.0",
