@@ -22,6 +22,23 @@ const config = {
     port: 9090
   },
 
+  jwt: {
+    secret: 'someSecret',
+    token: 'jwt-token',
+    cookieOptions: {
+      maxAge: 1000 * 60 * 15, // would expire after 15 minutes
+      httpOnly: true, // The cookie only accessible by the web server
+      signed: true // Indicates if the cookie should be signed
+    },
+    notVerifyPages: [
+      '/',
+      '/login',
+      '/signup',
+      '/api/login',
+      '/api/users/create'
+    ]
+  },
+
   server: {
     host,
     port: 3000
