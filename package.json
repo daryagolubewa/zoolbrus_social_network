@@ -26,6 +26,7 @@
     "start": "node start.js"
   },
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "connected-react-router": "^5.0.1",
     "express": "^4.16.4",
@@ -33,6 +34,7 @@
     "handlebars": "^4.0.12",
     "history": "^4.7.2",
     "http-proxy-middleware": "^0.19.0",
+    "mongoose": "^5.3.15",
     "prop-types": "^15.6.2",
 
     "react": "^16.7.0-alpha.0",

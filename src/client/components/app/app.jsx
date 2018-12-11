@@ -33,7 +33,7 @@ import './app.css';
 //   posts: selectPosts(state),
 //   isPostsFetching: selectIsPostsFetching(state)
 
-// });
+
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   doRoute: push
