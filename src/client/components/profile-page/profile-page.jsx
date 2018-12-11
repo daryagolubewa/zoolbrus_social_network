@@ -26,30 +26,30 @@ export default class ProfilePage extends Component {
   }
 
 
-changeDiscription = () => {
+  changeDiscription = () => {
 
-}
+  }
 
   discription = () => (
-      <div>
-        <p>«Саня, верни сотку» относится к
-          категории абстрактных мемов, за
-          которыми практически нет никакого
-          смысла (так же, как мемы «Чечня
-          круто», «Ало вы шо ебобо» и другие).
+    <div>
+      <p>«Саня, верни сотку» относится к
+        категории абстрактных мемов, за
+        которыми практически нет никакого
+        смысла (так же, как мемы «Чечня
+        круто», «Ало вы шо ебобо» и другие).
         </p>
-        <p>Эту надпись, сделанную шрифтом
-          «Лобстер», чаще всего помещают на
-          картинки с изображением публичных
-          людей или животных. Другие варианты:
-          «Саня, где сотка», «Сань, верни сотку», «Когда Саня не вернул сотку».
+      <p>Эту надпись, сделанную шрифтом
+        «Лобстер», чаще всего помещают на
+        картинки с изображением публичных
+        людей или животных. Другие варианты:
+        «Саня, где сотка», «Сань, верни сотку», «Когда Саня не вернул сотку».
         </p>
-        <p>Часто под эту фразу подбираются
-          картинки, на которых кто-то за
-          кем-то гонится или обращается
-          с вопросом.
+      <p>Часто под эту фразу подбираются
+        картинки, на которых кто-то за
+        кем-то гонится или обращается
+        с вопросом.
         </p>
-      </div>
+    </div>
   )
 
   render() {
@@ -57,9 +57,9 @@ changeDiscription = () => {
       <div className='profile-page'>
         <div className='content'>
           <div className='sidebar'>
-            <img src={avatar} className='avatar'/>
+            <img src={avatar} className='avatar' />
             <div className='buttonSend'>
-            <Button bsStyle="primary">Отправить сообщение</Button>
+              <Button bsStyle="primary">Отправить сообщение</Button>
             </div>
           </div>
           <div className='name'>
@@ -75,7 +75,7 @@ changeDiscription = () => {
             <div className='role'>
               <h3 className='whatRole'>О себе:</h3>
               <h3 className='isRole'>
-              {this.discription()}
+                {this.discription()}
               </h3>
             </div>
             <div className='role'>
@@ -96,10 +96,10 @@ changeDiscription = () => {
 
             <Modal show={this.state.show} onHide={this.handleClose}>
               <Modal.Body>
-                <FormProfilePage/>
+                <FormProfilePage />
               </Modal.Body>
               <Modal.Footer>
-                  <Button onClick={this.handleClose}>Close</Button>
+                <Button onClick={this.handleClose}>Close</Button>
               </Modal.Footer>
             </Modal>
           </div>

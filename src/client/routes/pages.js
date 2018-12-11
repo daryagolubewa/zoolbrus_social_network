@@ -32,6 +32,10 @@ export const PAGES = {
   feedback: {
     name: 'feedback',
     path: '/feedback'
+  },
+  profile: {
+    name: 'profile',
+    path: '/profile'
   }
   // API: {
   //   fetchUser: {
