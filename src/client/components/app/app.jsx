@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, Col, Row, Nav
+  Button, Col, Row, Grid
 } from 'react-bootstrap';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
@@ -89,47 +89,47 @@ export default class App extends Component {
     } = this.props;
     // console.log(this.props);
     return (
-            <div className='container-fluid'>
-                <Row>
-                    <Col xs={4} xsOffset={4} lg={4} lgOffset={9} md={8} mdOffset={8}>
-                        <div className='button-toolbar'>
-                            <Link to={PAGES.signup.path}>
-                                <Button className='form-buttons' bsStyle='primary'>Зарегистрироваться</Button>
-                            </Link>
-                            <Link to={PAGES.signin.path}>
-                            <Button className='form-buttons' bsStyle='primary'>Войти</Button>
-                            </Link>
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={4} lg={12} md={8} className='main-container'>
-                        <Nav bsStyle="pills" className='menu'>
-                            <Link to={PAGES.users.teachers.path}>
-                                <div className='menu-text'>
-                                    Наши преподаватели
-                                </div>
-                            </Link>
-                            <Link to={PAGES.users.students.path}>
-                                <div className='menu-text'>
-                                    Наши студенты
-                                </div>
-                            </Link>
-                            <Link to={PAGES.about.path}>
-                                <div className='menu-text'>
-                                    О нас
-                                </div>
-                            </Link>
-                            <Link to={PAGES.feedback.path}>
-                                <div className='menu-text'>
-                                    Задать вопрос
-                                </div>
-                            </Link>
-                        </Nav>
-                    </Col>
-                </Row>
-                {children}
-            </div>
+      <div className='container-fluid'>
+        <Grid>
+          <Row>
+            <Col xs={4} xsOffset={4} lg={4} lgOffset={9} md={8} mdOffset={8}>
+              <div className='button-toolbar'>
+                <Link to={PAGES.signup.path}>
+                  <Button className='form-buttons' bsStyle='primary'>Зарегистрироваться</Button>
+                </Link>
+                <Link to={PAGES.signin.path}>
+                  <Button className='form-buttons' bsStyle='primary'>Войти</Button>
+                </Link>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={4} lg={12} md={8} className='main-container'>
+              <Link to={PAGES.users.teachers.path}>
+                <div className='menu-text'>
+                  Наши преподаватели
+                </div>
+              </Link>
+              <Link to={PAGES.users.students.path}>
+                <div className='menu-text'>
+                  Наши студенты
+                </div>
+              </Link>
+              <Link to={PAGES.about.path}>
+                <div className='menu-text'>
+                  О нас
+                </div>
+              </Link>
+              <Link to={PAGES.feedback.path}>
+                <div className='menu-text'>
+                  Задать вопрос
+                </div>
+              </Link>
+            </Col>
+          </Row>
+          {children}
+        </Grid>
+      </div>
     );
   }
 }
