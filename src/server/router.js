@@ -26,14 +26,14 @@ router.get('/posts', (req, res) => {
 });
 
 const usersArr = [
-  { login: 'mike', name: 'Michael Klishevich' },
-  { login: 'john', name: 'John King' }
+  { email: 'mk@elbrusboot.camp', name: 'Michael Klishevich' },
+  { email: 'test@test.com', name: 'John King' }
 ];
 
 router.post('/login', (req, res) => {
   console.log(JSON.stringify(req.body));
-  const requestUser = req.body.login;
-  const currentUser = usersArr.filter(el => el.login === requestUser)[0];
+  const requestUserEmail = req.body.email;
+  const currentUser = usersArr.filter(el => el.email === requestUserEmail)[0];
   console.log('currentUser', currentUser);
   setTimeout(() => {
     if (currentUser) {
