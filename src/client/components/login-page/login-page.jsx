@@ -1,4 +1,4 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 // import { push } from 'connected-react-router';
 // import connect from 'react-redux/es/connect/connect';
@@ -16,8 +16,13 @@
 //   postLoginSuccess: postLoginSuccessAC,
 //   postLoginError: postLoginErrorAC
 // }, dispatch);
+import {
+  Col, Form, FormGroup, FormControl, Button, ControlLabel
+} from 'react-bootstrap';
+import './login-page.css';
+
 //
-// class LoginPage extends Component {
+export default class LoginPage extends Component {
 //   static propTypes = {
 //     doRoute: Type.func,
 //     postLoginStart: Type.func,
@@ -64,17 +69,45 @@
 //     }
 //   };
 //
-//   render() {
-//     console.log('state', this.state);
-//     return (
-//       <div className='info-page'>
-//         <h1>Login Page</h1>
-//         <input onChange={ this.handleLoginChange } />
-//         <button onClick={ this.handleLogIn }>Log In</button>
-//       </div>
-//     );
-//   }
-// }
+  render() {
+    console.log('state', this.state);
+    return (
+        <Col className='login-page'>
+        <Form horizontal>
+            <ControlLabel>Войти на сайт</ControlLabel>
+            <FormGroup controlId="formHorizontalEmail" className="form-info">
+                <Col lg={2}>
+                    Email
+                </Col>
+                <Col md={4}>
+                    <FormControl type="email" placeholder="Введите email"/>
+                </Col>
+            </FormGroup>
+
+            <FormGroup controlId="formHorizontalPassword">
+                <Col sm={2}>
+                    Password
+                </Col>
+                <Col md={4}>
+                    <FormControl type="password" placeholder="Введите пароль"/>
+                </Col>
+            </FormGroup>
+
+            <FormGroup>
+                <Col smOffset={2} sm={10}>
+                    <Button type="submit" bsStyle="primary">Войти</Button>
+                </Col>
+            </FormGroup>
+        </Form>
+        </Col>
+    // {/*<Col className='login-page'>*/}
+    //   {/*<h1>Войти на сайт</h1>*/}
+    //   {/*<input onChange={ this.handleLoginChange } />*/}
+    //   {/*<button onClick={ this.handleLogIn }>Log In</button>*/}
+    // {/*</Col>*/}
+    );
+  }
+}
 //
 // const VisibleLoginPage = connect(
 //   null,

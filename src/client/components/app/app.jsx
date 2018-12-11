@@ -96,7 +96,7 @@ export default class App extends Component {
                             <Link to={PAGES.signup.path}>
                                 <Button className='form-buttons' bsStyle='primary'>Зарегистрироваться</Button>
                             </Link>
-                            <Link to={PAGES.signin.path}>
+                            <Link to={PAGES.login.path}>
                             <Button className='form-buttons' bsStyle='primary'>Войти</Button>
                             </Link>
                         </div>
