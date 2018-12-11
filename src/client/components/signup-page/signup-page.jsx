@@ -23,7 +23,7 @@ handleClick = async (e) => {
   const userName = this.state.name;
   const userEmail = this.state.email;
   const userPass = this.state.password;
-  const res = await fetch('/signup', {
+  const res = await fetch('/api/users/create', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json; charset=utf-8'
@@ -31,8 +31,8 @@ handleClick = async (e) => {
     body: JSON.stringify({ name: userName, email: userEmail, password: userPass })
   });
 
-  const user = await res.text();
-  if (user.status === 200) {
+  // const user = await res.text();
+  if (res.status === 200) {
     window.location.replace('/');
   } else {
     this.setState({ show: false });
