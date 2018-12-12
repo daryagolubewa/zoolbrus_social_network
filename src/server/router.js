@@ -2,10 +2,13 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import User from './models/user';
+import { usersArr } from './constants/test-users';
+import { createJWToken } from './libs/auth';
+import config from './config/default';
+
 // import Post from './models/post'
 // import Message from './models/message'
 const saltRounds = 10;
-
 
 mongoose.connect('mongodb://localhost/zoolbrus');
 
@@ -25,18 +28,16 @@ router.get('/posts', (req, res) => {
   ]), 1000);
 });
 
-const usersArr = [
-  { login: 'mike', name: 'Michael Klishevich' },
-  { login: 'john', name: 'John King' }
-];
-
 router.post('/login', (req, res) => {
   console.log(JSON.stringify(req.body));
-  const requestUser = req.body.login;
-  const currentUser = usersArr.filter(el => el.login === requestUser)[0];
+  const requestUserEmail = req.body.email;
+  const currentUser = usersArr.filter(el => el.email === requestUserEmail)[0];
   console.log('currentUser', currentUser);
   setTimeout(() => {
     if (currentUser) {
+      const token = createJWToken(currentUser);
+      console.log('jwt-token', token);
+      res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
       res.send(currentUser);
     } else {
       res.status(401);
