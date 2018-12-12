@@ -26,7 +26,7 @@ export default class ProfilePage extends Component {
     this.handleShowChange = this.handleShowChange.bind(this);
     this.handleCloseChange = this.handleCloseChange.bind(this);
     this.handleShowLink = this.handleShowLink.bind(this);
-    this.handleCloseLink = this.handleCloseLink.bind(this);
+    this.addNewLink = this.addNewLink.bind(this);
 
     this.state = {
       showChange: false,
@@ -35,7 +35,8 @@ export default class ProfilePage extends Component {
         'hdsfhsdkjjjfkjkjsfd',
         'hdsfhsdkjjjfkjkjsfd',
         'hdsfhsdkjjjfkjkjsfd'
-      ]
+      ],
+      newLink: ''
     };
   }
 
@@ -67,23 +68,72 @@ export default class ProfilePage extends Component {
     this.setState({ showChange: true });
   }
 
-  handleCloseLink() {
-    this.setState({ showLink: false });
-  }
-
   handleShowLink() {
     this.setState({ showLink: true });
   }
 
-  changeDiscription = () => {
-
+  addFormLink = (e) => {
+    const newLink = e.target.value;
+    this.setState({ newLink });
   }
 
-  addLink = (e) => {
-    const newLink = e.target.value;
-    // console.log(newLink);
-    const allLinks = this.state.links.push(newLink);
-    this.setState({ links: allLinks });
+  addNewLink() {
+    const { newLink, links } = this.state;
+    if (newLink !== '') {
+      links.push(newLink);
+      this.setState({ links, showLink: false, newLink: '' });
+    } else {
+      this.setState({ showLink: false });
+    }
+  }
+
+  renderAddLink() {
+    if (this.state.showLink) {
+      return (
+        <div>
+          <FieldGroup
+          id="formControlsFile"
+          type="text"
+          className="formLink"
+          onChange={this.addFormLink}
+          />
+          <Button
+          onClick={this.addNewLink}
+          bsStyle="primary"
+          bsSize="small"
+          >
+            Добавить новую ссылку
+          </Button>
+        </div>
+      );
+    }
+    return (
+      <div></div>
+    );
+  }
+
+  renderAddLinkButton() {
+    if (this.state.showLink === false) {
+      return (
+        <Button
+          bsStyle="primary"
+          bsSize="small"
+          onClick={this.handleShowLink}
+        >
+            Добавить ссылку
+        </Button>
+      );
+    }
+    return (
+      <div></div>
+    );
+  }
+
+  deleteLink = (link) => {
+    const { links } = this.state;
+    const numberOfLink = links.indexOf(link);
+    links.splice(numberOfLink, 1);
+    this.setState({ links });
   }
 
 
@@ -91,89 +141,73 @@ export default class ProfilePage extends Component {
     const {
       name,
       discription,
-      work,
-      links
+      work
     } = this.props;
     return (
       <div className='profile-page'>
         <div className='content'>
           <div className='sidebar'>
-            <img src={avatar} className='avatar' />
+            <img src={ avatar } className='avatar' />
             <div className='buttonSend'>
               <Button bsStyle="primary">Отправить сообщение</Button>
             </div>
           </div>
           <div className='name'>
-            <h1 >{name}</h1>
+            <h3 >{ name }</h3>
             <div className='role'>
-              <h3 className='whatRole'>Роль:</h3>
-              <h3 className='isRole'>Студент</h3>
+              <p className='whatRole'>Роль:</p>
+              <p className='isRole'>Студент</p>
             </div>
             <div className='role'>
-              <h3 className='whatRole'>О себе:</h3>
-              <h3 className='isRole'>
-                {discription}
-              </h3>
+              <p className='whatRole'>О себе:</p>
+              <p className='isRole'>
+                { discription }
+              </p>
             </div>
             <div className='role'>
-              <h3 className='whatRole'>Место работы:</h3>
-              <h3 className='isRole'>{work}</h3>
+              <p className='whatRole'>Место работы:</p>
+              <p className='isRole'>{ work }</p>
             </div>
             <div className='role'>
-              <h3 className='whatRole'>Ссылки:</h3>
-              <h3 className='isRole'><ul>
-                { links.map(elem => <li><a href={elem}>{elem}</a></li>) }
-              </ul>
-              <Button
-              bsStyle="primary"
-              onClick={this.handleShowLink}>
-                Добавить ссылку
-              </Button>
-              <Modal
-              show={this.state.showLink}
-              onHide={this.handleCloseLink}>
-                <Modal.Body>
-                  <FieldGroup
-                      id="formControlsFile"
-                      type="text"
-                      label="Аватарка"
-                      help="Выберите аватарку"
-                      className="formLink"
-                  />
-                </Modal.Body>
-                <Modal.Footer>
+              <p className='whatRole'>Ссылки:</p>
+              <p className='isRole'>
+              {
+                this.state.links.map(elem => <p>
+                    <a href={elem}>{elem}</a>
                     <Button
-                    onClick={this.handleCloseLink}
                     bsStyle="primary"
-                    onChange={this.addLink}>
-                      Добавить новую ссылку
+                    bsSize="small"
+                    onClick={ () => { this.deleteLink(elem); } }
+                    >
+                      X
                     </Button>
-                </Modal.Footer>
-              </Modal>
-              </h3>
+                  </p>)
+              }
+              { this.renderAddLink() }
+              { this.renderAddLinkButton() }
+              </p>
             </div>
           </div>
           <div>
             <Button
             bsStyle="primary"
-            bsSize="large"
-            onClick={this.handleShowChange}>
+            bsSize="small"
+            onClick={ this.handleShowChange }
+            >
               Редактировать профиль
             </Button>
 
             <Modal
-            show={this.state.showChange}
-            onHide={this.handleCloseChange}>
+            show={ this.state.showChange }
+            onHide={ this.handleCloseChange }>
               <Modal.Body>
                 <FormProfilePage
-                name={name}
-                discription={discription}
-                work={work}
-                links={links}
+                discription={ discription }
+                work={ work }
                 />
               </Modal.Body>
               <Modal.Footer>
-                <Button onClick={this.handleCloseChange}>Close</Button>
+                <Button onClick={ this.handleCloseChange }>Close</Button>
               </Modal.Footer>
             </Modal>
           </div>

@@ -20,7 +20,6 @@ import { PAGES } from '../../routes/pages';
 // import { selectUser, selectIsUserFetching } from '../../redux/selectors/user-selectors';
 // import { selectPosts, selectIsPostsFetching } from '../../redux/selectors/post-selectors';
 import './app.css';
-import ProfilePage from '../profile-page/profile-page';
 
 
 // const cn = bemClassNameFactory('app');
@@ -138,7 +137,6 @@ class App extends Component {
             </Row>
             {children}
           </Grid>
-          <ProfilePage/>
         </div>
     );
   }
