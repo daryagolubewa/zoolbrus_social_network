@@ -6,7 +6,12 @@ import App from '../components/app/app';
 import HomePage from '../components/home-page/home-page';
 import InfoPage from '../components/info-page/info-page';
 import Page404 from '../components/page404/page404';
-import Login from '../components/login-page/login-page';
+import LoginPage from '../components/login-page/login-page';
+import StudentsPage from '../components/students-page/students-page';
+import TeachersPage from '../components/teachers-page/teachers-page';
+import FeedbackPage from '../components/feedback-page/feedback-page';
+import SignupPage from '../components/signup-page/signup-page';
+
 
 const WrappedApp = (Component, props) => (
   <App appName='Fancy React Redux App'>
@@ -15,28 +20,44 @@ const WrappedApp = (Component, props) => (
 );
 
 export default () => (
-  <Switch>
-    <Route
-      exact path={ PAGES.home.path }
-      render={ props => WrappedApp(HomePage, props) }
-    />
-    <Route
-      exact path={ PAGES.info.path }
-      render={ props => WrappedApp(InfoPage, props) }
-    />
-    <Route
-      exact path={ PAGES.page404.path }
-      render={ props => WrappedApp(Page404, props) }
-    />
-    <Route
-      exact path={ PAGES.login.path }
-      render={ props => WrappedApp(Login, props) }
-    />
-    <Route
-      path = '/'
-      render={ () => (
-        <Redirect to={ PAGES.page404.path } />
-      ) }
-    />
-  </Switch>
+    <Switch>
+        <Route
+            exact path={PAGES.home.path}
+            render={props => WrappedApp(HomePage, props)}
+        />
+        <Route
+            exact path={PAGES.about.path}
+            render={props => WrappedApp(InfoPage, props)}
+        />
+        <Route
+            exact path={PAGES.page404.path}
+            render={props => WrappedApp(Page404, props)}
+        />
+         <Route
+             exact path={PAGES.signup.path}
+             render={props => WrappedApp(SignupPage, props)}
+         />
+        <Route
+            exact path={PAGES.login.path}
+            render={props => WrappedApp(LoginPage, props)}
+        />
+        <Route
+            exact path={PAGES.users.teachers.path}
+            render={props => WrappedApp(TeachersPage, props)}
+        />
+        <Route
+            exact path={PAGES.users.students.path}
+            render={props => WrappedApp(StudentsPage, props)}
+        />
+        <Route
+            exact path={PAGES.feedback.path}
+            render={props => WrappedApp(FeedbackPage, props)}
+        />
+        <Route
+            path='/'
+            render={() => (
+                <Redirect to={PAGES.page404.path}/>
+            )}
+        />
+    </Switch>
 );
