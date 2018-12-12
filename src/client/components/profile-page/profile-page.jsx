@@ -122,15 +122,15 @@ export default class ProfilePage extends Component {
             <div className='role'>
               <h3 className='whatRole'>Ссылки:</h3>
               <h3 className='isRole'><ul>
-                {
-                  links.map(elem => <li><a href={elem}>{elem}</a></li>)
-                }
+                { links.map(elem => <li><a href={elem}>{elem}</a></li>) }
               </ul>
-              <Button bsStyle="primary"
+              <Button
+              bsStyle="primary"
               onClick={this.handleShowLink}>
                 Добавить ссылку
               </Button>
-              <Modal show={this.state.showLink}
+              <Modal
+              show={this.state.showLink}
               onHide={this.handleCloseLink}>
                 <Modal.Body>
                   <FieldGroup
@@ -142,9 +142,11 @@ export default class ProfilePage extends Component {
                   />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.handleCloseLink}
-                    bsStyle="primary" onChange={this.addLink}>
-                    Добавить новую ссылку
+                    <Button
+                    onClick={this.handleCloseLink}
+                    bsStyle="primary"
+                    onChange={this.addLink}>
+                      Добавить новую ссылку
                     </Button>
                 </Modal.Footer>
               </Modal>
@@ -152,9 +154,16 @@ export default class ProfilePage extends Component {
             </div>
           </div>
           <div>
-            <Button bsStyle="primary" bsSize="large" onClick={this.handleShowChange}>Редактировать профиль</Button>
+            <Button
+            bsStyle="primary"
+            bsSize="large"
+            onClick={this.handleShowChange}>
+              Редактировать профиль
+            </Button>
 
-            <Modal show={this.state.showChange} onHide={this.handleCloseChange}>
+            <Modal
+            show={this.state.showChange}
+            onHide={this.handleCloseChange}>
               <Modal.Body>
                 <FormProfilePage
                 name={name}
