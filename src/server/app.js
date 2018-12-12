@@ -4,13 +4,16 @@ import path from 'path';
 import proxy from 'http-proxy-middleware';
 import handlebars from 'handlebars';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import config from './config/default';
 import router from './router';
+import { verifyJwtMW } from './middlewares/verify-jwt';
 
 const winston = require('winston');
 const expressWinston = require('express-winston');
 
 const app = express();
+app.use(cookieParser(config.jwt.secret));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -18,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const { buildConfig: { assetsDir, targetDir }, server: { port }, proxyAssets } = config;
+
+app.all('*', verifyJwtMW);
 
 if (config.appModeDev) {
   app.use(

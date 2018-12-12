@@ -32,7 +32,6 @@ import './app.css';
 //   posts: selectPosts(state),
 //   isPostsFetching: selectIsPostsFetching(state)
 
-// });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   doRoute: push
@@ -65,6 +64,7 @@ class App extends Component {
     return (
 
         <div className='container-fluid'>
+          <header >
           <Grid>
             <Row>
               <Col xs={4} lg={12} md={8} className='main-menu'>
@@ -97,45 +97,23 @@ class App extends Component {
                 </div>
                 <div className='button-toolbar enter-buttons'>
                   <Link to={PAGES.signup.path}>
-                    <Button className='form-buttons' bsStyle='primary'>Зарегистрироваться</Button>
+                    <Button className='form-buttons' bsStyle='default'>Зарегистрироваться</Button>
                   </Link>
                   <Link to={PAGES.login.path}>
-                    <Button className='form-buttons' bsStyle='primary'>Войти</Button>
+                    <Button className='form-buttons' bsStyle='default'>Войти</Button>
                   </Link>
 
                 </div>
               </Col>
-              {/* <Col xs={4} lg={12} md={8} className='button-toolbar'> */}
-                {/* <div className='button-toolbar'> */}
-                {/* <Link to={PAGES.home.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* На главную */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* <Link to={PAGES.users.teachers.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* Наши преподаватели */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* <Link to={PAGES.users.students.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* Наши студенты */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* <Link to={PAGES.about.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* О нас */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* <Link to={PAGES.feedback.path}> */}
-                  {/* <div className='menu-text'> */}
-                    {/* Задать вопрос */}
-                  {/* </div> */}
-                {/* </Link> */}
-                {/* </div> */}
-              {/* </Col> */}
             </Row>
+          </Grid>
+          </header>
+              <Grid>
+                <Row>
+                  <Col>
             {children}
+                  </Col>
+                </Row>
           </Grid>
         </div>
     );
