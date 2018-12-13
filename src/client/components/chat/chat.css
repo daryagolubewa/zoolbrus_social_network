@@ -1,26 +1,19 @@
-body, html{height:100%}
 .chatContainer {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    
+    display: flex;
+    flex-direction: row;  
 }
 .chatParticipants {
     display: flex;
-    position: relative;
-    border: 1px solid;
-    background-color: antiquewhite;
-    width: 25%;
-    height: 100%;
+    flex-direction: column;
+    background-color: rgb(212, 255, 255);
+    width: 30vh;
+    height: calc(100vh - 60px);
 }
 .chatDialog {  
-    margin-left: 30%;  
+    overflow-y: scroll;
     display: flex;
-    border: 1px solid;
-    position: relative;
-    width: 60%;
-    height: 100%;
-    background-color: aqua
+    width: 100vh;
+    height: calc(100vh - 60px);
+    background-color: rgb(250, 250, 250);
+
 }

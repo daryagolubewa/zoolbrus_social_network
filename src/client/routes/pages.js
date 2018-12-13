@@ -17,6 +17,10 @@ export const PAGES = {
       path: '/users/students'
     }
   },
+  chat: {
+    name: 'chat',
+    path: '/chat'
+  },
   login: {
     name: 'login',
     path: '/login'
@@ -32,6 +36,14 @@ export const PAGES = {
   feedback: {
     name: 'feedback',
     path: '/feedback'
+  },
+  profile: {
+    name: 'profile',
+    path: '/profile'
+  },
+  user: {
+    name: 'user',
+    path: '/users/:id'
   },
   API: {
     postLogin: {

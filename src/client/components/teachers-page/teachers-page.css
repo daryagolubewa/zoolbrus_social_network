@@ -1,0 +1,30 @@
+.button-connect {
+    margin: 9px 0px 0px 0px;
+}
+
+.teacher-post-block {
+    padding: 0px;
+    width: 600px;
+}
+
+.teacher-mini-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px 0px 0px 0px;
+    border: 1px solid #97ceef;
+    border-radius: 30px;
+    padding: 20px 20px 15px 20px;
+}
+
+.teacher-mini-picture {
+    align-self: baseline;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    margin: 15px 10px 0px 0px;
+
+
+}

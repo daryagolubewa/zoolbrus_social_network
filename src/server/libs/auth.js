@@ -14,7 +14,6 @@ export function verifyJWTToken(token) {
 }
 
 export function createJWToken(data) {
-  console.log(data, data);
   return jwt.sign({
     data
   }, config.jwt.secret, {
