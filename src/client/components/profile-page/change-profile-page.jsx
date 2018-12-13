@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import './profile-page.css';
 import {
-  Button, FormGroup, ControlLabel, HelpBlock, FormControl, Checkbox, Radio
+  Button,
+  FormGroup,
+  ControlLabel,
+  HelpBlock,
+  FormControl
 } from 'react-bootstrap';
+import Type from 'prop-types';
+
 
 function FieldGroup({
   id, label, help, ...props
@@ -18,90 +24,85 @@ function FieldGroup({
 
 
 export default class FormProfilePage extends Component {
+  static propTypes = {
+    discription: Type.string,
+    company: Type.string,
+    links: Type.array
+  };
+
+  state = {
+    discription: this.props.discription,
+    company: this.props.company
+  }
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  changeProfile = async () => {
+    const {
+      discription,
+      company
+    } = this.state;
+    let res = await fetch('/api/profile/change', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify({
+        email: 'yasha@lava.ru',
+        discription,
+        company
+      })
+    });
+    res = await res.json();
+    this.setState({ company: res });
+  }
+
   render() {
     return (
-        <form>
-            <FieldGroup
-                id="formControlsText"
-                type="text"
-                label="Text"
-                placeholder="Enter text"
-            />
+      <div>
+        <FieldGroup
+        id="formControlsFile"
+        type="file"
+        label="Аватарка"
+        help="Выберите аватарку"
+        />
 
-            <FieldGroup
-                id="formControlsEmail"
-                type="email"
-                label="Email address"
-                placeholder="Enter email"
-            />
+        <FormGroup controlId="formControlsTextarea">
+          <ControlLabel>Места работы</ControlLabel>
+          <FormControl
+          componentClass="textarea"
+          placeholder="Введите ваши места работы"
+          defaultValue={ this.state.company }
+          name="company"
+          onChange={ this.handleChange }
+          />
+        </FormGroup>
 
-            <FieldGroup
-                id="formControlsPassword"
-                label="Password"
-                type="password" />
+        <FormGroup controlId="formControlsTextarea">
+          <ControlLabel>О себе</ControlLabel>
+          <FormControl
+          componentClass="textarea"
+          placeholder="Введите информацию о себе"
+          defaultValue={this.state.discription}
+          name="discription"
+          onChange={ this.handleChange }
+          />
+        </FormGroup>
 
-            <FieldGroup
-                id="formControlsFile"
-                type="file"
-                label="File"
-                help="Example block-level help text here."
-            />
-
-            <Checkbox checked readOnly>
-                Checkbox
-            </Checkbox>
-
-            <Radio checked readOnly>
-                Radio
-            </Radio>
-
-            <FormGroup>
-                <Checkbox inline>1</Checkbox>
-                <Checkbox inline>2</Checkbox>{' '}
-                <Checkbox inline>3</Checkbox>
-            </FormGroup>
-
-            <FormGroup>
-                <Radio name="radioGroup" inline>
-                    1
-                </Radio>{' '}
-                <Radio name="radioGroup" inline>
-                    2
-                </Radio>{' '}
-                <Radio name="radioGroup" inline>
-                    3
-                </Radio>
-            </FormGroup>
-
-            <FormGroup controlId="formControlsSelect">
-                <ControlLabel>Select</ControlLabel>
-                <FormControl componentClass="select" placeholder="select">
-                    <option value="select">select</option>
-                    <option value="other">...</option>
-                </FormControl>
-            </FormGroup>
-
-            <FormGroup controlId="formControlsSelectMultiple">
-                <ControlLabel>Multiple select</ControlLabel>
-                <FormControl componentClass="select" multiple>
-                    <option value="select">select (multiple)</option>
-                    <option value="other">...</option>
-                </FormControl>
-            </FormGroup>
-
-            <FormGroup controlId="formControlsTextarea">
-                <ControlLabel>Textarea</ControlLabel>
-                <FormControl componentClass="textarea"
-                placeholder="textarea" />
-            </FormGroup>
-
-            <FormGroup>
-                <ControlLabel>Static text</ControlLabel>
-                <FormControl.Static>email@example.com</FormControl.Static>
-            </FormGroup>
-
-            <Button type="submit">Submit</Button>
-        </form>
+        <Button
+        type="submit"
+        onClick={ () => {
+          this.changeProfile();
+          this.props.show();
+          this.props.changeCompany(this.state.company);
+          this.props.changeDiscription();
+        }
+        }>
+          Сохранить изменения
+        </Button>
+      </div>
     );
   }
 }

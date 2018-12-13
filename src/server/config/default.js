@@ -40,7 +40,14 @@ const config = {
       '/users/students',
       '/api/users/teachers',
       '/api/users/students',
-      '/api/seed'
+      '/api/seed',
+      '/profile',
+      '/api/profile',
+      '/api/profile/change',
+      '/api/profile/addlink',
+      '/api/profile/deletelink',
+      '/feedback',
+      '/api/feedback'
     ]
   },
 

@@ -26,6 +26,7 @@
     "start": "node start.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "connected-react-router": "^5.0.1",

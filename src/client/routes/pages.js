@@ -33,6 +33,14 @@ export const PAGES = {
     name: 'feedback',
     path: '/feedback'
   },
+  profile: {
+    name: 'profile',
+    path: '/profile'
+  },
+  user: {
+    name: 'user',
+    path: '/users/:id'
+  },
   API: {
     postLogin: {
       name: 'postLogin',
