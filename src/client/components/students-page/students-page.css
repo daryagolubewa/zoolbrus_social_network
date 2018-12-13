@@ -1,0 +1,25 @@
+.button-connect {
+    margin: 9px 0px 0px 0px;
+}
+
+.student-post-block {
+    padding: 0px;
+}
+
+.student-mini-profile {
+    margin: 20px 0px 0px 0px;
+    border: 1px solid #97ceef;
+    border-radius: 30px;
+    padding: 20px 20px 15px 20px;
+}
+
+.student-mini-picture {
+    align-self: baseline;
+    text-align: right;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    margin: 15px 10px 0px 0px;
+}

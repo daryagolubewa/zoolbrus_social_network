@@ -7,6 +7,7 @@ import { createJWToken } from './libs/auth';
 import config from './config/default';
 import sendEmail from './middlewares/send-email';
 
+// const faker = require('faker');
 // import Post from './models/post'
 import Message from './models/message';
 
@@ -21,13 +22,6 @@ router.get('/users', async (req, res) => {
   res.json({ users });
 });
 
-router.get('/posts', (req, res) => {
-  setTimeout(() => res.send([
-    { id: 1, title: 'First Post', description: 'The very best first post...' },
-    { id: 2, title: 'Second Post', description: 'Dirty post :(' }
-  ]), 1000);
-});
-
 
 router.post('/login', async (req, res) => {
   const currentUser = await User.findOne({ email: req.body.email });
@@ -39,11 +33,24 @@ router.post('/login', async (req, res) => {
     res.status(401);
     res.send('401 UNAUTHORIZED');
   }
+
+  const requestUserEmail = req.body.email;
+  const currentUser = usersArr.filter(el => el.email === requestUserEmail)[0];
+  setTimeout(() => {
+    if (currentUser) {
+      const token = createJWToken(currentUser);
+      res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
+      res.send(currentUser);
+    } else {
+      res.status(401);
+      res.send('401 UNAUTHORIZED');
+    }
+  }, 1000);
 });
 
 router.post('/users/create', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
-  if (user == null) {
+  if (user === null) {
     user = new User({
       name: req.body.name,
       email: req.body.email,
@@ -88,6 +95,36 @@ router.post('/messages', async (req, res) => {
   const allMsg = msgs.concat(msgsRev);
   allMsg.sort((a, b) => b.createdAt - a.createdAt);
   res.json({ msgs: allMsg.reverse() });
+// router.get('/seed', async (req, res) => {
+//   for (let i = 0; i < 50; i + i) {
+//     const newUsers = new User({
+//       name: faker.name.findName(),
+//       email: faker.internet.email(),
+//       password: faker.internet.password(),
+//       role: 'student',
+//       company: faker.company.companyName()
+//     });
+//     // await newUsers.save();
+//   }
+//   res.send('dfdf');
+// });
+
+
+router.post('/users/teachers', async (req, res) => {
+  const teachers = await User.find({ role: 'teacher' });
+  if (teachers === null) {
+    return res.send(400, 'No teachers found');
+  }
+  return res.json(teachers);
+});
+
+router.post('/users/students', async (req, res) => {
+  const students = await User.find({ role: 'student' });
+  if (students === null) {
+    return res.send(400, 'No students found');
+  }
+  return res.json(students);
+});
 
 router.post('/profile', async (req, res) => {
   const userProfile = await User.findOne({ email: req.body.email });
@@ -151,5 +188,6 @@ router.post('/feedback', async (req, res) => {
   sendEmail(req, signup);
   res.send(200);
 });
+
 
 export default router;
