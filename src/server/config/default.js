@@ -38,6 +38,13 @@ const config = {
       '/api/users/create',
       '/api/mes',
       '/api/messages'
+      '/profile',
+      '/api/profile',
+      '/api/profile/change',
+      '/api/profile/addlink',
+      '/api/profile/deletelink',
+      '/feedback',
+      '/api/feedback'
     ]
   },
 

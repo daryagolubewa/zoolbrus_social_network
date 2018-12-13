@@ -20,7 +20,6 @@ import { PAGES } from '../../routes/pages';
 // import { selectUser, selectIsUserFetching } from '../../redux/selectors/user-selectors';
 // import { selectPosts, selectIsPostsFetching } from '../../redux/selectors/post-selectors';
 import './app.css';
-// import ProfilePage from '../profile-page/profile-page';
 
 
 // const cn = bemClassNameFactory('app');
@@ -103,9 +102,8 @@ class App extends Component {
                   <Link to={PAGES.login.path}>
                     <Button className='form-buttons' bsStyle='default'>Войти</Button>
                   </Link>
-
-          <Link to={PAGES.chat.path}>
-          <Button>ok</Button></Link>
+                  <Link to={PAGES.chat.path}>
+                  <Button>ok</Button></Link>
                 </div>
               </Col>
             </Row>

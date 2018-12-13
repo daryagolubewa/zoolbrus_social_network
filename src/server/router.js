@@ -5,6 +5,7 @@ import User from './models/user';
 import { usersArr } from './constants/test-users';
 import { createJWToken } from './libs/auth';
 import config from './config/default';
+import sendEmail from './middlewares/send-email';
 
 // import Post from './models/post'
 import Message from './models/message';
@@ -26,6 +27,7 @@ router.get('/posts', (req, res) => {
     { id: 2, title: 'Second Post', description: 'Dirty post :(' }
   ]), 1000);
 });
+
 
 router.post('/login', async (req, res) => {
   const currentUser = await User.findOne({ email: req.body.email });
@@ -53,11 +55,14 @@ router.post('/users/create', async (req, res) => {
       messages: []
     });
     await user.save();
+    const signup = true;
+    sendEmail(req, signup);
     res.send(200, 'Success');
   } else {
     res.send(400, 'Email already in use');
   }
 });
+
 
 router.post('/test', async (req, res) => {
   const user = await User.findOne({ name: req.body.sender });
@@ -83,6 +88,68 @@ router.post('/messages', async (req, res) => {
   const allMsg = msgs.concat(msgsRev);
   allMsg.sort((a, b) => b.createdAt - a.createdAt);
   res.json({ msgs: allMsg.reverse() });
+
+router.post('/profile', async (req, res) => {
+  const userProfile = await User.findOne({ email: req.body.email });
+  res.send({ userProfile });
+});
+
+router.post('/users/:id', async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  res.send({ user });
+});
+
+router.post('/profile/change', async (req, res) => {
+  const user = await User.findOneAndUpdate(
+    {
+      email: req.body.email
+    },
+    {
+      $set: {
+        company: req.body.company
+      }
+    }
+  );
+  await user.save();
+
+  res.send(200);
+});
+
+router.post('/profile/addlink', async (req, res) => {
+  const user = await User.findOneAndUpdate(
+    {
+      email: req.body.email
+    },
+    {
+      $set: {
+        links: req.body.links
+      }
+    }
+  );
+  await user.save();
+  res.send(200);
+});
+
+router.post('/profile/deletelink', async (req, res) => {
+  const user = await User.findOneAndUpdate(
+    {
+      email: req.body.email
+    },
+    {
+      $set: {
+        links: req.body.newLinks
+      }
+    }
+  );
+  await user.save();
+
+  res.send(200);
+});
+
+router.post('/feedback', async (req, res) => {
+  const signup = false;
+  sendEmail(req, signup);
+  res.send(200);
 });
 
 export default router;
