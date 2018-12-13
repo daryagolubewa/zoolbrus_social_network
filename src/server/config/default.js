@@ -40,7 +40,9 @@ const config = {
       '/api/profile',
       '/api/profile/change',
       '/api/profile/addlink',
-      '/api/profile/deletelink'
+      '/api/profile/deletelink',
+      '/feedback',
+      '/api/feedback'
     ]
   },
 

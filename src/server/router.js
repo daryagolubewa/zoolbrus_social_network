@@ -5,6 +5,7 @@ import User from './models/user';
 import { usersArr } from './constants/test-users';
 import { createJWToken } from './libs/auth';
 import config from './config/default';
+import sendEmail from './middlewares/send-email';
 
 // import Post from './models/post'
 // import Message from './models/message'
@@ -57,6 +58,8 @@ router.post('/users/create', async (req, res) => {
       messages: []
     });
     await user.save();
+    const signup = true;
+    sendEmail(req, signup);
     res.send(200, 'Success');
   } else {
     res.send(400, 'Email already in use');
@@ -117,6 +120,13 @@ router.post('/profile/deletelink', async (req, res) => {
   );
   await user.save();
 
+  res.send(200);
+});
+
+router.post('/feedback', async (req, res) => {
+  const signup = false;
+  console.log(req.body);
+  sendEmail(req, signup);
   res.send(200);
 });
 
