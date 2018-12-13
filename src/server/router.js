@@ -95,6 +95,8 @@ router.post('/messages', async (req, res) => {
   const allMsg = msgs.concat(msgsRev);
   allMsg.sort((a, b) => b.createdAt - a.createdAt);
   res.json({ msgs: allMsg.reverse() });
+})
+
 // router.get('/seed', async (req, res) => {
 //   for (let i = 0; i < 50; i + i) {
 //     const newUsers = new User({
