@@ -26,9 +26,11 @@ router.get('/users', async (req, res) => {
 router.post('/login', async (req, res) => {
   const currentUser = await User.findOne({ email: req.body.email });
   if (currentUser) {
-    const token = createJWToken(currentUser);
-    res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
-    res.send(currentUser);
+    if (bcrypt.compare(req.body.password, currentUser.password)) {
+      const token = createJWToken(currentUser);
+      res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
+      res.send(currentUser);
+    }
   } else {
     res.status(401);
     res.send('401 UNAUTHORIZED');
