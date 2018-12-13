@@ -15,8 +15,6 @@
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
-    "lint": "eslint . --ext .js,.jsx",
-    "lint-fix": "eslint . --ext .js --fix",
     "build-server": "rimraf .build/ && babel ./src/server --out-dir .build/server/ --copy-files",
     "build-client": "webpack --mode production",
     "build": "npm run build-server && npm run build-client",
