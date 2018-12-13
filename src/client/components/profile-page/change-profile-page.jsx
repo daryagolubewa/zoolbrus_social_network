@@ -24,47 +24,85 @@ function FieldGroup({
 
 
 export default class FormProfilePage extends Component {
-    static propTypes = {
-      discription: Type.string,
-      work: Type.string,
-      links: Type.array
-    };
+  static propTypes = {
+    discription: Type.string,
+    company: Type.string,
+    links: Type.array
+  };
 
+  state = {
+    discription: this.props.discription,
+    company: this.props.company
+  }
 
-    render() {
-      const {
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  changeProfile = async () => {
+    const {
+      discription,
+      company
+    } = this.state;
+    let res = await fetch('/api/profile/change', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify({
+        email: 'yasha@lava.ru',
         discription,
-        work
-      } = this.props;
-      return (
-        <form>
-          <FieldGroup
-          id="formControlsFile"
-          type="file"
-          label="Аватарка"
-          help="Выберите аватарку"
+        company
+      })
+    });
+    res = await res.json();
+    this.setState({ company: res });
+  }
+
+  render() {
+    return (
+      <div>
+        <FieldGroup
+        id="formControlsFile"
+        type="file"
+        label="Аватарка"
+        help="Выберите аватарку"
+        />
+
+        <FormGroup controlId="formControlsTextarea">
+          <ControlLabel>Места работы</ControlLabel>
+          <FormControl
+          componentClass="textarea"
+          placeholder="Введите ваши места работы"
+          defaultValue={ this.state.company }
+          name="company"
+          onChange={ this.handleChange }
           />
+        </FormGroup>
 
-          <FormGroup controlId="formControlsTextarea">
-            <ControlLabel>Места работы</ControlLabel>
-            <FormControl
-            componentClass="textarea"
-            placeholder="Введите ваши места работы"
-            defaultValue={work}
-            />
-          </FormGroup>
+        <FormGroup controlId="formControlsTextarea">
+          <ControlLabel>О себе</ControlLabel>
+          <FormControl
+          componentClass="textarea"
+          placeholder="Введите информацию о себе"
+          defaultValue={this.state.discription}
+          name="discription"
+          onChange={ this.handleChange }
+          />
+        </FormGroup>
 
-          <FormGroup controlId="formControlsTextarea">
-            <ControlLabel>О себе</ControlLabel>
-            <FormControl
-            componentClass="textarea"
-            placeholder="Введите информацию о себе"
-            defaultValue={discription}
-            />
-          </FormGroup>
-
-          <Button type="submit">Сохранить изменения</Button>
-        </form>
-      );
-    }
+        <Button
+        type="submit"
+        onClick={ () => {
+          this.changeProfile();
+          this.props.show();
+          this.props.changeCompany(this.state.company);
+          this.props.changeDiscription();
+        }
+        }>
+          Сохранить изменения
+        </Button>
+      </div>
+    );
+  }
 }

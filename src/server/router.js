@@ -29,14 +29,11 @@ router.get('/posts', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  console.log(JSON.stringify(req.body));
   const requestUserEmail = req.body.email;
   const currentUser = usersArr.filter(el => el.email === requestUserEmail)[0];
-  console.log('currentUser', currentUser);
   setTimeout(() => {
     if (currentUser) {
       const token = createJWToken(currentUser);
-      console.log('jwt-token', token);
       res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
       res.send(currentUser);
     } else {
@@ -47,9 +44,7 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/users/create', async (req, res) => {
-  console.log(req.body);
   let user = await User.findOne({ email: req.body.email });
-  console.log(user);
   if (user == null) {
     user = new User({
       name: req.body.name,
@@ -66,6 +61,58 @@ router.post('/users/create', async (req, res) => {
   } else {
     res.send(400, 'Email already in use');
   }
+});
+
+router.post('/profile', async (req, res) => {
+  const userProfile = await User.findOne({ email: req.body.email });
+  res.send({ userProfile });
+});
+
+router.post('/profile/change', async (req, res) => {
+  const user = await User.findOneAndUpdate(
+    {
+      email: req.body.email
+    },
+    {
+      $set: {
+        company: req.body.company
+      }
+    }
+  );
+  await user.save();
+
+  res.send(200, { test: req.body.company });
+});
+
+router.post('/profile/addlink', async (req, res) => {
+  const user = await User.findOneAndUpdate(
+    {
+      email: req.body.email
+    },
+    {
+      $set: {
+        links: req.body.links
+      }
+    }
+  );
+  await user.save();
+  res.send(200);
+});
+
+router.post('/profile/deletelink', async (req, res) => {
+  const user = await User.findOneAndUpdate(
+    {
+      email: req.body.email
+    },
+    {
+      $set: {
+        links: req.body.newLinks
+      }
+    }
+  );
+  await user.save();
+
+  res.send(200);
 });
 
 export default router;
