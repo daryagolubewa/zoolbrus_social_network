@@ -197,9 +197,6 @@ export default class ProfilePage extends Component {
                 changeDiscription={ this.changeDiscription}
                 />
               </Modal.Body>
-              <Modal.Footer>
-                <Button onClick={ this.handleCloseChange }>Close</Button>
-              </Modal.Footer>
             </Modal>
           </div>
         </div>
