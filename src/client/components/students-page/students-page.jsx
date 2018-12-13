@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Col, Panel, ListGroup, ListGroupItem, Image, Button
 } from 'react-bootstrap';
+import Pagination from 'react-paginating';
 import connect from 'react-redux/es/connect/connect';
 import { showStudentsListSuccessAC } from '../../redux/actions/students-action';
 import { selectStudentsList } from '../../redux/selectors/students-selector';
@@ -17,9 +18,20 @@ const mapDispatchToProps = dispatch => ({
   showStudentsListSuccess: students => dispatch(showStudentsListSuccessAC(students))
 });
 
-class StudentsPage extends Component {
-  // state = {
-  //   students: [ ]};
+
+ class StudentsPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      currentPage: 1
+    };
+  }
+
+  handlePageChange = (page) => {
+    this.setState({
+      currentPage: page
+    });
+  };
 
   async componentDidMount() {
     const { showStudentsListSuccess } = this.props;
@@ -30,15 +42,23 @@ class StudentsPage extends Component {
     });
     if (res.status === 200) {
       const studentsList = await res.json();
+      console.log(studentsList)
       showStudentsListSuccess(studentsList);
     }
   }
 
   render() {
+    const studentsLimit = 350;
+    const pageCount = 3;
+    const { currentPage } = this.state;
+    const total = this.props.studentsList.length / studentsLimit;
+    console.log('ffff', total)
+    console.log(this.state)
     return (
+      <div>
             <div className='students-page'>
                 <h1>Наши студенты </h1>
-              { this.props.studentsList.map(studentsInfo => (<div className="student-mini-profile row">
+              { this.props.studentsList[currentPage - 1].map(studentsInfo => (<div className="student-mini-profile row" key={ studentsInfo.id }>
                   <div className="student-mini-picture col-lg-3">
                     <Image src={ noavatar } circle className="student-mini-profile-pic"/>
                   </div>
@@ -71,6 +91,85 @@ class StudentsPage extends Component {
                 </div>
               ))}
             </div>
+        <Pagination
+          total={total}
+          studentsLimit={studentsLimit}
+          pageCount={pageCount}
+          currentPage={currentPage}
+        >
+          {({
+            pages,
+            currentPage,
+            hasNextPage,
+            hasPreviousPage,
+            previousPage,
+            nextPage,
+            totalPages,
+            getPageItemProps
+          }) => (
+            <div>
+              <button
+                {...getPageItemProps({
+                  pageValue: 1,
+                  onPageChange: this.handlePageChange
+                })}
+              >
+                first
+              </button>
+
+              {hasPreviousPage && (
+                <button
+                  {...getPageItemProps({
+                    pageValue: previousPage,
+                    onPageChange: this.handlePageChange
+                  })}
+                >
+                  {'<'}
+                </button>
+              )}
+
+              {pages.map((page) => {
+                let activePage = null;
+                if (currentPage === page) {
+                  activePage = { backgroundColor: '#fdce09' };
+                }
+                return (
+                  <button
+                    key={page}
+                    style={activePage}
+                    {...getPageItemProps({
+                      pageValue: page,
+                      onPageChange: this.handlePageChange
+                    })}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+
+              {hasNextPage && (
+                <button
+                  {...getPageItemProps({
+                    pageValue: nextPage,
+                    onPageChange: this.handlePageChange
+                  })}
+                >
+                  {'>'}
+                </button>
+              )}
+
+              <button
+                {...getPageItemProps({
+                  pageValue: totalPages,
+                  onPageChange: this.handlePageChange
+                })}
+              >
+                last
+              </button>
+            </div>
+          )}
+        </Pagination>
+      </div>
     );
   }
 }
