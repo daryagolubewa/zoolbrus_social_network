@@ -125,7 +125,6 @@ router.post('/profile/deletelink', async (req, res) => {
 
 router.post('/feedback', async (req, res) => {
   const signup = false;
-  console.log(req.body);
   sendEmail(req, signup);
   res.send(200);
 });

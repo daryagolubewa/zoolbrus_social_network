@@ -18,7 +18,6 @@ const sendEmail = (req, signup) => {
       subject: 'Вопрос с zoolbrus',
       text: req.body.message
     };
-    console.log(msg);
     sgMail.send(msg);
   }
 };
