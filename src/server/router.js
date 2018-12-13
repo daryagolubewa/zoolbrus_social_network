@@ -68,6 +68,11 @@ router.post('/profile', async (req, res) => {
   res.send({ userProfile });
 });
 
+router.post('/users/:id', async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  res.send({ user });
+});
+
 router.post('/profile/change', async (req, res) => {
   const user = await User.findOneAndUpdate(
     {
@@ -81,7 +86,7 @@ router.post('/profile/change', async (req, res) => {
   );
   await user.save();
 
-  res.send(200, { test: req.body.company });
+  res.send(200);
 });
 
 router.post('/profile/addlink', async (req, res) => {
