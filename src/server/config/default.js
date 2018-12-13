@@ -35,7 +35,12 @@ const config = {
       '/login',
       '/signup',
       '/api/login',
-      '/api/users/create'
+      '/api/users/create',
+      '/users/teachers',
+      '/users/students',
+      '/api/users/teachers',
+      '/api/users/students',
+      '/api/seed'
     ]
   },
 

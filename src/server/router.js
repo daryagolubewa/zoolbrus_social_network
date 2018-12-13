@@ -6,6 +6,7 @@ import { usersArr } from './constants/test-users';
 import { createJWToken } from './libs/auth';
 import config from './config/default';
 
+// const faker = require('faker');
 // import Post from './models/post'
 // import Message from './models/message'
 const saltRounds = 10;
@@ -14,29 +15,23 @@ mongoose.connect('mongodb://localhost/zoolbrus');
 
 const router = express.Router();
 
-router.get('/user', (req, res) => {
-  setTimeout(() => res.send({
-    name: 'Michael',
-    email: 'mk@elbrusboot.camp'
-  }), 1000);
-});
-
-router.get('/posts', (req, res) => {
-  setTimeout(() => res.send([
-    { id: 1, title: 'First Post', description: 'The very best first post...' },
-    { id: 2, title: 'Second Post', description: 'Dirty post :(' }
-  ]), 1000);
-});
-
-router.post('/login', (req, res) => {
-  console.log(JSON.stringify(req.body));
+router.post('/login', async (req, res) => {
+  // const newUsers = new User({
+  //   name: faker.name.findName(),
+  //   email: faker.internet.email(),
+  //   password: faker.internet.password(),
+  //   role: 'student',
+  //   company: faker.company.companyName()
+  // });
+  // await newUsers.save();
+  // console.log(newUsers);
+  // console.log(JSON.stringify(req.body));
+  // await seed();
   const requestUserEmail = req.body.email;
   const currentUser = usersArr.filter(el => el.email === requestUserEmail)[0];
-  console.log('currentUser', currentUser);
   setTimeout(() => {
     if (currentUser) {
       const token = createJWToken(currentUser);
-      console.log('jwt-token', token);
       res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
       res.send(currentUser);
     } else {
@@ -47,10 +42,8 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/users/create', async (req, res) => {
-  console.log(req.body);
   let user = await User.findOne({ email: req.body.email });
-  console.log(user);
-  if (user == null) {
+  if (user === null) {
     user = new User({
       name: req.body.name,
       email: req.body.email,
@@ -67,5 +60,32 @@ router.post('/users/create', async (req, res) => {
     res.send(400, 'Email already in use');
   }
 });
+
+// router.get('/seed', async (req, res) => {
+//   for (let i = 0; i < 50; i + i) {
+//     const newUsers = new User({
+//       name: faker.name.findName(),
+//       email: faker.internet.email(),
+//       password: faker.internet.password(),
+//       role: 'student',
+//       company: faker.company.companyName()
+//     });
+//     // await newUsers.save();
+//   }
+//   res.send('dfdf');
+// });
+
+router.get('/x', (req, res) => {
+  res.send('Hello');
+});
+
+router.post('/users/teachers', async (req, res) => {
+  const teachers = await User.find({ role: 'teacher' });
+  if (teachers === null) {
+    return res.send(400, 'No teachers found');
+  }
+  return res.json(teachers);
+});
+
 
 export default router;

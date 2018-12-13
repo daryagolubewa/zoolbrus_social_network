@@ -4,7 +4,7 @@ import { push } from 'connected-react-router';
 import connect from 'react-redux/es/connect/connect';
 import Type from 'prop-types';
 import {
-  Col, Form, FormGroup, FormControl, Button, ControlLabel, Row
+  Col, Form, FormGroup, FormControl, Button, ControlLabel
 } from 'react-bootstrap';
 import { PAGES } from '../../routes/pages';
 import {
@@ -62,55 +62,42 @@ class LoginPage extends Component {
         })
       });
       const userJson = await user.json();
-      console.log('userJson', userJson);
       postLoginSuccess(userJson);
       doRoute(PAGES.home.path);
     } catch (e) {
-      console.error(e);
       postLoginError();
     }
   };
 
   render() {
-    console.log('state', this.state);
     return (
       <div className='login-page'>
-        <Row className="show-grid">
-          <h2>Login Page</h2>
-        </Row>
-        <Row className="show-grid">
           <Form horizontal>
+            <ControlLabel>Введите данные для входа</ControlLabel>
             <FormGroup className="form-info">
-            </FormGroup>
-            <FormGroup className="form-info">
-              <Col componentClass={ControlLabel} lg={2}>Email</Col>
-              <Col lg={4}>
-                <FormControl
-                  name='email'
-                  type='email'
-                  placeholder='Введите email'
-                  onChange={this.handleChange}
-                />
+              <Col lg={2}>
+                Email
+              </Col>
+              <Col md={4}>
+                <FormControl type="email" name="email" placeholder="Введите email" onChange={ this.handleChange } />
               </Col>
             </FormGroup>
-            <FormGroup>
-              <Col componentClass={ControlLabel} lg={2}>Password</Col>
-              <Col lg={4}>
-                <FormControl
-                  name='password'
-                  type='password'
-                  placeholder='Введите пароль'
-                  onChange={this.handleChange}
-                />
+
+            <FormGroup >
+              <Col sm={2}>
+                Password
+              </Col>
+              <Col md={4}>
+                <FormControl type="password" name="password" placeholder="Введите пароль" onChange={ this.handleChange } />
               </Col>
             </FormGroup>
+
             <FormGroup>
-              <Col lgOffset={2} lg={4}>
-                <Button type='submit' bsStyle='primary' onClick={this.handleLogin}>Войти</Button>
+              <Col smOffset={2} sm={10}>
+                <Button type="submit" bsStyle="primary" onClick={this.handleLogin}>Войти</Button>
               </Col>
             </FormGroup>
           </Form>
-        </Row>
       </div>
     );
   }
