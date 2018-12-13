@@ -37,6 +37,10 @@ export const PAGES = {
     name: 'profile',
     path: '/profile'
   },
+  user: {
+    name: 'user',
+    path: '/users/:id'
+  },
   API: {
     postLogin: {
       name: 'postLogin',

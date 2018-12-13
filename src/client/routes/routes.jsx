@@ -11,6 +11,7 @@ import StudentsPage from '../components/students-page/students-page';
 import TeachersPage from '../components/teachers-page/teachers-page';
 import FeedbackPage from '../components/feedback-page/feedback-page';
 import ProfilePage from '../components/profile-page/profile-page';
+import UserPage from '../components/user-page/user-page';
 import SignupPage from '../components/signup-page/signup-page';
 
 
@@ -57,6 +58,10 @@ export default () => (
         <Route
             exact path={PAGES.profile.path}
             render={props => WrappedApp(ProfilePage, props)}
+        />
+        <Route
+            exact path={PAGES.user.path}
+            render={props => WrappedApp(UserPage, props)}
         />
         <Route
             path='/'

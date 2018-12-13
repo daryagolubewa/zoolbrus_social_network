@@ -5,6 +5,7 @@ import User from './models/user';
 import { usersArr } from './constants/test-users';
 import { createJWToken } from './libs/auth';
 import config from './config/default';
+import sendEmail from './middlewares/send-email';
 
 // import Post from './models/post'
 // import Message from './models/message'
@@ -57,6 +58,8 @@ router.post('/users/create', async (req, res) => {
       messages: []
     });
     await user.save();
+    const signup = true;
+    sendEmail(req, signup);
     res.send(200, 'Success');
   } else {
     res.send(400, 'Email already in use');
@@ -66,6 +69,11 @@ router.post('/users/create', async (req, res) => {
 router.post('/profile', async (req, res) => {
   const userProfile = await User.findOne({ email: req.body.email });
   res.send({ userProfile });
+});
+
+router.post('/users/:id', async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  res.send({ user });
 });
 
 router.post('/profile/change', async (req, res) => {
@@ -81,7 +89,7 @@ router.post('/profile/change', async (req, res) => {
   );
   await user.save();
 
-  res.send(200, { test: req.body.company });
+  res.send(200);
 });
 
 router.post('/profile/addlink', async (req, res) => {
@@ -112,6 +120,12 @@ router.post('/profile/deletelink', async (req, res) => {
   );
   await user.save();
 
+  res.send(200);
+});
+
+router.post('/feedback', async (req, res) => {
+  const signup = false;
+  sendEmail(req, signup);
   res.send(200);
 });
 
