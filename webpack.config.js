@@ -14,8 +14,9 @@ module.exports = {
         from: 'src/client/public',
         to: 'public'
       }
-    ], { debug: 'info' })
-  ],
+    ]
+    , { debug: 'error' }
+    )],
   module: {
     rules: [
       {
