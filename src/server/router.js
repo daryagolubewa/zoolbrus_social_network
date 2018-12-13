@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import User from './models/user';
-import { usersArr } from './constants/test-users';
 import { createJWToken } from './libs/auth';
 import config from './config/default';
 
@@ -30,9 +29,11 @@ router.get('/posts', (req, res) => {
 router.post('/login', async (req, res) => {
   const currentUser = await User.findOne({ email: req.body.email });
   if (currentUser) {
-    const token = createJWToken(currentUser);
-    res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
-    res.send(currentUser);
+    if (bcrypt.compare(req.body.password, currentUser.password)) {
+      const token = createJWToken(currentUser);
+      res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
+      res.send(currentUser);
+    }
   } else {
     res.status(401);
     res.send('401 UNAUTHORIZED');
@@ -64,7 +65,7 @@ router.post('/test', async (req, res) => {
   res.json({ user });
 });
 
-router.post('/mes', async (req, res) => {
+router.post('/mes', async (req) => {
   const sender = await User.findById(req.body.sender);
   const receiver = await User.findById(req.body.receiver);
   const msg = new Message({
