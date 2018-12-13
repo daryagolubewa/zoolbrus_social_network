@@ -89,6 +89,13 @@ router.post('/users/teachers', async (req, res) => {
   return res.json(teachers);
 });
 
+router.post('/users/students', async (req, res) => {
+  const students = await User.find({ role: 'student' });
+  if (students === null) {
+    return res.send(400, 'No students found');
+  }
+  return res.json(students);
+});
 
 router.post('/profile', async (req, res) => {
   const userProfile = await User.findOne({ email: req.body.email });
