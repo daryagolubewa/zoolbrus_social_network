@@ -36,6 +36,7 @@ export const PAGES = {
   profile: {
     name: 'profile',
     path: '/profile'
+  },
   API: {
     postLogin: {
       name: 'postLogin',

@@ -35,7 +35,12 @@ const config = {
       '/login',
       '/signup',
       '/api/login',
-      '/api/users/create'
+      '/api/users/create',
+      '/profile',
+      '/api/profile',
+      '/api/profile/change',
+      '/api/profile/addlink',
+      '/api/profile/deletelink'
     ]
   },
 
