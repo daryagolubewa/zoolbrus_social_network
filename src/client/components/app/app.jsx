@@ -103,10 +103,14 @@ class App extends Component {
                   <Link to={PAGES.login.path}>
                     <Button className='form-buttons' bsStyle='default'>Войти</Button>
                   </Link>
+
+          <Link to={PAGES.chat.path}>
+          <Button>ok</Button></Link>
                 </div>
               </Col>
             </Row>
           </Grid>
+
           </header>
               <Grid>
                 <Row>

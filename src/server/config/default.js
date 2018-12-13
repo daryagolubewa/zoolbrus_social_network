@@ -26,7 +26,7 @@ const config = {
     secret: 'someSecret',
     token: 'jwt-token',
     cookieOptions: {
-      maxAge: 1000 * 60 * 15, // would expire after 15 minutes
+      maxAge: 1000 * 60 * 30, // would expire after 15 minutes
       httpOnly: true, // The cookie only accessible by the web server
       signed: true // Indicates if the cookie should be signed
     },
@@ -35,7 +35,9 @@ const config = {
       '/login',
       '/signup',
       '/api/login',
-      '/api/users/create'
+      '/api/users/create',
+      '/api/mes',
+      '/api/messages'
     ]
   },
 

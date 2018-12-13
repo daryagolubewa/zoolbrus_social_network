@@ -11,6 +11,7 @@ import StudentsPage from '../components/students-page/students-page';
 import TeachersPage from '../components/teachers-page/teachers-page';
 import FeedbackPage from '../components/feedback-page/feedback-page';
 import SignupPage from '../components/signup-page/signup-page';
+import ChatPage from '../components/chat/chat';
 
 
 const WrappedApp = (Component, props) => (
@@ -24,6 +25,10 @@ export default () => (
         <Route
             exact path={PAGES.home.path}
             render={props => WrappedApp(HomePage, props)}
+        />
+        <Route
+            exact path={PAGES.chat.path}
+            render={props => WrappedApp(ChatPage, props)}
         />
         <Route
             exact path={PAGES.about.path}

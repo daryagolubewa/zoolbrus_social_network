@@ -17,6 +17,10 @@ export const PAGES = {
       path: '/users/students'
     }
   },
+  chat: {
+    name: 'chat',
+    path: '/chat'
+  },
   login: {
     name: 'login',
     path: '/login'
