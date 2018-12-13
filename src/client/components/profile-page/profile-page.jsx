@@ -157,7 +157,8 @@ export default class ProfilePage extends Component {
               <p className="whatRole">Ссылки:</p>
               <div className="isRole">
               {
-                this.state.links.map(elem => <div className="profile-page__link">
+                this.state.links.map(elem => 
+                  <div className="profile-page__link">
                     <a href={elem} className="profile-page__view-link">{elem}</a>
                     <Button
                     bsStyle="primary"
@@ -167,7 +168,8 @@ export default class ProfilePage extends Component {
                     >
                       X
                     </Button>
-                  </div>)
+                  </div>
+                )
               }
               { this.renderAddLink() }
               { this.renderAddLinkButton() }
@@ -178,7 +180,7 @@ export default class ProfilePage extends Component {
             <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={ this.handleShowChange }
+            onClick={ this.handleShowChange }            
             >
               Редактировать профиль
             </Button>
