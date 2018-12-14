@@ -31,13 +31,14 @@ class StudentsPage extends Component {
 
   async componentDidMount() {
     const { showStudentsListSuccess } = this.props;
-    const res = await fetch('http://localhost:3000/api/users/students', {
-      method: 'POST',
-      headers: { },
-      body: { }
-    });
+    const res = await fetch('http://localhost:3000/api/users/students')
+  //     method: 'POST',
+  //     headers: { },
+  //     body: { }
+  //   });
     if (res.status === 200) {
       const studentsList = await res.json();
+      console.log(studentsList)
       showStudentsListSuccess(studentsList);
       console.log(studentsList)
     }

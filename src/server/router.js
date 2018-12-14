@@ -86,20 +86,20 @@ router.post('/messages', async (req, res) => {
   res.json({ msgs: allMsg.reverse() });
 })
 
-// router.get('/seed', async (req, res) => {
-//   for (let i = 0; i < 50; i + i) {
-//     const newUsers = new User({
-//       name: faker.name.findName(),
-//       email: faker.internet.email(),
-//       password: faker.internet.password(),
-//       role: 'student',
-//       company: faker.company.companyName()
-//     });
-//     await newUsers.save();
-//   }
-//   console.log(1111111111111111)
-//   res.send('dfdf');
-// });
+router.get('/seed', async (req, res) => {
+  for (let i = 0; i < 50; i++) {
+    const newUsers = new User({
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      role: 'student',
+      company: faker.company.companyName()
+    });
+    await newUsers.save();
+  }
+  console.log(1111111111111111)
+  res.send('dfdf');
+});
 
 
 router.post('/users/teachers', async (req, res) => {
@@ -110,9 +110,9 @@ router.post('/users/teachers', async (req, res) => {
   return res.json(teachers);
 });
 
-router.post('/users/students', async (req, res) => {
+router.get('/users/students', async (req, res) => {
   const students = await User.find({ role: 'student' });
-  if (students === null) {
+  if (students.length === 0) {
     return res.send(400, 'No students found');
   }
   return res.json(students);
