@@ -43,7 +43,7 @@ class TeachersPage extends Component {
       <div className="teacher-page" >
         <h1>Наши преподаватели </h1>
         { this.props.teachersList.map(teacherInfo => (
-            <div className="teacher-mini-profile" key={ teacherInfo.id } >
+            <div className="teacher-mini-profile" key={ teacherInfo._id } >
             <div className="teacher-mini-picture">
               <Image src={ teacherInfo.avatar } circle className="teacher-mini-profile-pic"/>
             </div>

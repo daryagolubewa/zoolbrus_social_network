@@ -105,7 +105,6 @@ router.post('/messages', async (req, res) => {
 //   res.send('dfdf');
 // });
 
-
 router.post('/users/teachers', async (req, res) => {
   const teachers = await User.find({ role: 'teacher' });
   if (teachers === null) {
@@ -114,8 +113,8 @@ router.post('/users/teachers', async (req, res) => {
   return res.json(teachers);
 });
 
-router.get('/users/students', async (req, res) => {
-  const students = await User.find({ role: 'student' });
+router.post('/users/students', async (req, res) => {
+  const students = await User.find({ role: 'student' }).skip(req.body.currentPage).limit(req.body.studentsLimit);
   if (students.length === 0) {
     return res.send(400, 'No students found');
   }
@@ -199,7 +198,7 @@ router.post('/users/:id/changerole', async (req, res) => {
 
 router.get('/isauth', async (req, res, next) => {
   verifyJwtMW
-  
+  console.log(req.user);
   res.json(req.user)
 })
 export default router;
