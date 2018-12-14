@@ -9,6 +9,8 @@ import { showTeachersListSuccessAC } from '../../redux/actions/teachers-action';
 import { selectTeachersList } from '../../redux/selectors/teachers-selector';
 import './teachers-page.css';
 import noavatar from '../../public/images/noavatar.png';
+import { PAGES } from '../../routes/pages';
+import { Link } from 'react-router-dom';
 
 
 const mapStateToProps = state => ({
@@ -43,7 +45,7 @@ class TeachersPage extends Component {
         { this.props.teachersList.map(teacherInfo => (
             <div className="teacher-mini-profile" key={ teacherInfo._id } >
             <div className="teacher-mini-picture">
-              <Image src={ noavatar } circle className="teacher-mini-profile-pic"/>
+              <Image src={ teacherInfo.avatar } circle className="teacher-mini-profile-pic"/>
             </div>
             <div>
               <Col lg={11} md={4} sm={2} className="teacher-post-block">
@@ -53,7 +55,9 @@ class TeachersPage extends Component {
                       {/* <Link to={'/users/:id'}> */}
                       {/* <Image src={danya} circle className="mini-profile-pic"/> */}
                       {/* Даниил Капустин */}
-                      { teacherInfo.name }
+                      <Link to={PAGES.users.user.call(teacherInfo._id)}>
+                        { teacherInfo.name }
+                      </Link>
                       {/* </Link> */}
                     </Panel.Title>
                   </Panel.Heading>

@@ -13,6 +13,7 @@ import FeedbackPage from '../components/feedback-page/feedback-page';
 import ProfilePage from '../components/profile-page/profile-page';
 import UserPage from '../components/user-page/user-page';
 import SignupPage from '../components/signup-page/signup-page';
+import ChatPage from '../components/chat/chat';
 
 
 const WrappedApp = (Component, props) => (
@@ -26,6 +27,10 @@ export default () => (
         <Route
             exact path={PAGES.home.path}
             render={props => WrappedApp(HomePage, props)}
+        />
+        <Route
+            exact path={PAGES.chat.path}
+            render={props => WrappedApp(ChatPage, props)}
         />
         <Route
             exact path={PAGES.about.path}
@@ -60,7 +65,7 @@ export default () => (
             render={props => WrappedApp(ProfilePage, props)}
         />
         <Route
-            exact path={PAGES.user.path}
+            exact path={PAGES.users.user.path}
             render={props => WrappedApp(UserPage, props)}
         />
         <Route

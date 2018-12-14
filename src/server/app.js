@@ -5,12 +5,12 @@ import proxy from 'http-proxy-middleware';
 import handlebars from 'handlebars';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import socketIO from 'socket.io';
 import config from './config/default';
 import router from './router';
 import { verifyJwtMW } from './middlewares/verify-jwt';
+const fetch = require('node-fetch');
 
-const winston = require('winston');
-const expressWinston = require('express-winston');
 
 const app = express();
 app.use(cookieParser(config.jwt.secret));
@@ -36,18 +36,6 @@ if (config.appModeDev) {
   );
 }
 
-app.use(expressWinston.logger({
-  transports: [
-    new winston.transports.Console()
-  ],
-  format: winston.format.combine(
-    winston.format.json()
-  ),
-  meta: true,
-  msg: 'HTTP {{res.statusCode}} {{req.method}} {{req.url}}',
-  expressFormat: true,
-  colorize: false
-}));
 
 app.use('/api', router);
 
@@ -62,4 +50,48 @@ app.use('*', (req, res) => {
   res.send(template(context));
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+const io = socketIO.listen(app.listen(port, () => console.log(`Example app listening on port ${port}!`)));
+
+let userCur;
+
+
+io.on('connection', (socket) => {
+  console.log('User connected');
+  socket.on('send message', async (message) => {
+    const response = await fetch('http://localhost:3000/api/mes', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        sender: message.sender,
+        receiver: message.receiver,
+        text: message.text
+      })
+    });
+    userCur = { ...message };
+    // response = await response.json()
+    // socket.emit('mesArr', {text:message})
+  });
+
+  socket.on('refresh', async (user) => {
+    let response = await fetch('http://127.0.0.1:3000/api/messages', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        sender: user.sender,
+        receiver: user.receiver
+      })
+    });
+    response = await response.json();
+    socket.emit('msgs', response.msgs);
+  });
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});

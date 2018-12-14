@@ -26,7 +26,7 @@ const config = {
     secret: 'someSecret',
     token: 'jwt-token',
     cookieOptions: {
-      maxAge: 1000 * 60 * 15, // would expire after 15 minutes
+      maxAge: 1000 * 60 * 30, // would expire after 15 minutes
       httpOnly: true, // The cookie only accessible by the web server
       signed: true // Indicates if the cookie should be signed
     },
@@ -36,7 +36,8 @@ const config = {
       '/signup',
       '/api/login',
       '/api/users/create',
-      '/users/teachers',
+      '/api/mes',
+      '/api/messages',
       '/users/students',
       '/api/users/teachers',
       '/api/users/students',
@@ -47,7 +48,10 @@ const config = {
       '/api/profile/addlink',
       '/api/profile/deletelink',
       '/feedback',
-      '/api/feedback'
+      '/api/feedback',
+      '/api/users/id',
+      // /\/users\/\w*/,
+      '/api/users/:id/changerole'
     ]
   },
 
