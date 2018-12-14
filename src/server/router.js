@@ -34,19 +34,6 @@ router.post('/login', async (req, res) => {
     res.status(401);
     res.send('401 UNAUTHORIZED');
   }
-
-  const requestUserEmail = req.body.email;
-  const currentUser = usersArr.filter(el => el.email === requestUserEmail)[0];
-  setTimeout(() => {
-    if (currentUser) {
-      const token = createJWToken(currentUser);
-      res.cookie(config.jwt.token, token, config.jwt.cookieOptions);
-      res.send(currentUser);
-    } else {
-      res.status(401);
-      res.send('401 UNAUTHORIZED');
-    }
-  }, 1000);
 });
 
 router.post('/users/create', async (req, res) => {
