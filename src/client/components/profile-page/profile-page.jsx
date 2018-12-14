@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap';
 // import Type from "prop-types";
 import ChangeProfile from './change-profile-page';
-import avatar from '../../public/images/noavatar.png';
+import noavatar from '../../public/images/noavatar.png';
 import { selectLoginUser } from '../../redux/selectors/login-selectors';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -149,17 +149,17 @@ class Profile extends Component {
     this.setState({ company });
   }
 
-  changeDiscription = (discription) => {
+  changediscription = (discription) => {
     this.setState({ discription });
   }
 
   render() {
-    console.log(this.props.login)
+    // console.log(this.state.avatar)
     return (
       <div className="profile-page">
         <div className="content">
           <div className="sidebar">
-            <img src={ avatar } className="avatar" />
+            <img src={ noavatar } className="avatar" />
             <div className="buttonSend">
               <Button bsStyle="primary">Отправить сообщение</Button>
             </div>
