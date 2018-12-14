@@ -51,7 +51,7 @@ class StudentsPage extends Component {
                 {/* <button onClick={this.seed}>asdsada</button> */}
               { this.props.studentsList.map(studentsInfo => (<div className="student-mini-profile row">
                   <div className="student-mini-picture col-lg-3">
-                    <Image src={ noavatar } circle className="student-mini-profile-pic"/>
+                    <Image src={ studentsInfo.avatar } circle className="student-mini-profile-pic"/>
                   </div>
                   <div className="student-mini-info">
                     <Col lg={7} className="student-post-block">
