@@ -38,7 +38,6 @@ const config = {
       '/api/users/create',
       '/api/mes',
       '/api/messages',
-      '/users/teachers',
       '/users/students',
       '/api/users/teachers',
       '/api/users/students',

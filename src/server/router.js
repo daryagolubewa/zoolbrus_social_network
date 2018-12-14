@@ -2,10 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import User from './models/user';
-import { usersArr } from './constants/test-users';
 import { createJWToken } from './libs/auth';
 import config from './config/default';
 import sendEmail from './middlewares/send-email';
+import { verifyJwtMW } from './middlewares/verify-jwt';
 
 const faker = require('faker');
 // import Post from './models/post'
@@ -67,7 +67,7 @@ router.post('/test', async (req, res) => {
   res.json({ user });
 });
 
-router.post('/mes', async (req, res) => {
+router.post('/mes', async (req) => {
   const sender = await User.findById(req.body.sender);
   const receiver = await User.findById(req.body.receiver);
   const msg = new Message({
@@ -87,6 +87,7 @@ router.post('/messages', async (req, res) => {
   allMsg.sort((a, b) => b.createdAt - a.createdAt);
   res.json({ msgs: allMsg.reverse() });
 })
+
 
 // router.get('/seed', async (req, res) => {
 //   for (let i = 0; i < 50; i++) {
@@ -196,4 +197,10 @@ router.post('/users/:id/changerole', async (req, res) => {
 });
 
 
+router.get('/isauth', async (req, res, next) => {
+  verifyJwtMW
+  console.log(req.user);
+  
+  res.json(req.user)
+})
 export default router;

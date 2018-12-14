@@ -31,7 +31,7 @@ class StudentsPage extends Component {
 
   async componentDidMount() {
     const { showStudentsListSuccess } = this.props;
-    const res = await fetch('http://localhost:3000/api/users/students')
+    const res = await fetch('/api/users/students')
   //     method: 'POST',
   //     headers: { },
   //     body: { }
@@ -71,6 +71,7 @@ class StudentsPage extends Component {
                         </ListGroup>
                         <Panel.Body className="student-user-description" >
                           { studentsInfo.description }
+                          { studentsInfo.company }
                         </Panel.Body>
                         <ListGroup>
                           <ListGroupItem className="student-connect-button">

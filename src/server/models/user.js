@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
   password: String,
   role: String,
   company: String,
+  description: String,
+  avatar: String,
   groupName: String,
   links: Array,
   messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }]
