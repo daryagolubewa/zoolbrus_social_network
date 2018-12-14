@@ -95,7 +95,7 @@ router.post('/messages', async (req, res) => {
 //       email: faker.internet.email(),
 //       avatar: faker.image.avatar(),
 //       password: faker.internet.password(),
-//       role: 'student',
+//       role: 'teacher',
 //       company: faker.company.companyName()
 //     });
 //     await newUsers.save();

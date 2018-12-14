@@ -48,7 +48,6 @@ class StudentsPage extends Component {
     return (
             <div className='students-page'>
                 <h1>Наши студенты </h1>
-                {/* <button onClick={this.seed}>asdsada</button> */}
               { this.props.studentsList.map(studentsInfo => (<div className="student-mini-profile row">
                   <div className="student-mini-picture col-lg-3">
                     <Image src={ studentsInfo.avatar } circle className="student-mini-profile-pic"/>
