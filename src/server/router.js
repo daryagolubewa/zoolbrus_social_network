@@ -90,10 +90,11 @@ router.post('/users/teachers', async (req, res) => {
 });
 
 router.post('/users/students', async (req, res) => {
-  const students = await User.find({ role: 'student' });
-  if (students === null) {
+  const students = await User.find({ role: 'student' }).skip(req.body.currentPage).limit(req.body.studentsLimit);
+  if (students.length === 0) {
     return res.send(400, 'No students found');
   }
+  console.log(res.send(students))
   return res.json(students);
 });
 

@@ -18,8 +18,7 @@ const mapDispatchToProps = dispatch => ({
   showStudentsListSuccess: students => dispatch(showStudentsListSuccessAC(students))
 });
 
-
- class StudentsPage extends Component {
+class StudentsPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,32 +32,55 @@ const mapDispatchToProps = dispatch => ({
     });
   };
 
+
+  // state = {
+  //   students: [ ]};
+  // async seed () {
+  //   res = await fetch('/api/seed')
+  //   console.log(res)
+  // }
+
+
   async componentDidMount() {
+    this.showStudents();
+  }
+
+  // async componentDidUpdate() {
+  //   const pageChange = this.handlePageChange();
+  //   if (pageChange) {
+  //     this.showStudents();
+  //   }
+  // }
+
+  showStudents = async () => {
     const { showStudentsListSuccess } = this.props;
-    const res = await fetch('http://localhost:3000/api/users/students', {
-      method: 'POST',
-      headers: { },
-      body: { }
+    const studentsLimit = 10;
+    const res = await fetch('/api/users/students', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify({ currentPage: this.state.currentPage, studentsLimit })
     });
     if (res.status === 200) {
       const studentsList = await res.json();
-      console.log(studentsList)
       showStudentsListSuccess(studentsList);
+      // console.log(studentsList);
     }
-  }
+  };
 
   render() {
-    const studentsLimit = 350;
+    const studentsLimit = 10;
     const pageCount = 3;
     const { currentPage } = this.state;
-    const total = this.props.studentsList.length / studentsLimit;
-    console.log('ffff', total)
-    console.log(this.state)
+    const total = this.props.studentsList.length * studentsLimit;
+    console.log('ffff', total);
+    console.log(this.state);
     return (
       <div>
-            <div className='students-page'>
-                <h1>Наши студенты </h1>
-              { this.props.studentsList[currentPage - 1].map(studentsInfo => (<div className="student-mini-profile row" key={ studentsInfo.id }>
+        <div className='students-page'>
+          <h1>Наши студенты </h1>
+          { this.props.studentsList.map(studentsInfo => (<div className="student-mini-profile row" key={ studentsInfo._id }>
                   <div className="student-mini-picture col-lg-3">
                     <Image src={ noavatar } circle className="student-mini-profile-pic"/>
                   </div>
@@ -89,7 +111,7 @@ const mapDispatchToProps = dispatch => ({
                     </Col>
                   </div>
                 </div>
-              ))}
+          ))}
             </div>
         <Pagination
           total={total}
@@ -108,64 +130,57 @@ const mapDispatchToProps = dispatch => ({
             getPageItemProps
           }) => (
             <div>
-              <button
+              <Button
                 {...getPageItemProps({
                   pageValue: 1,
                   onPageChange: this.handlePageChange
                 })}
               >
                 first
-              </button>
+              </Button>
 
               {hasPreviousPage && (
-                <button
+                <Button
                   {...getPageItemProps({
                     pageValue: previousPage,
                     onPageChange: this.handlePageChange
                   })}
                 >
                   {'<'}
-                </button>
+                </Button>
               )}
 
-              {pages.map((page) => {
-                let activePage = null;
-                if (currentPage === page) {
-                  activePage = { backgroundColor: '#fdce09' };
-                }
-                return (
-                  <button
+              {pages.map(page => (
+                  <Button
                     key={page}
-                    style={activePage}
                     {...getPageItemProps({
                       pageValue: page,
                       onPageChange: this.handlePageChange
                     })}
                   >
                     {page}
-                  </button>
-                );
-              })}
+                  </Button>
+              ))}
 
               {hasNextPage && (
-                <button
+                <Button
                   {...getPageItemProps({
                     pageValue: nextPage,
                     onPageChange: this.handlePageChange
                   })}
                 >
                   {'>'}
-                </button>
+                </Button>
               )}
 
-              <button
+              <Button
                 {...getPageItemProps({
                   pageValue: totalPages,
                   onPageChange: this.handlePageChange
                 })}
               >
                 last
-              </button>
+              </Button>
             </div>
           )}
         </Pagination>
