@@ -65,7 +65,7 @@ export default () => (
             render={props => WrappedApp(ProfilePage, props)}
         />
         <Route
-            exact path={PAGES.user.path}
+            exact path={PAGES.users.user.path}
             render={props => WrappedApp(UserPage, props)}
         />
         <Route

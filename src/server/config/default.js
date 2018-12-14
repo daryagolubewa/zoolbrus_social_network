@@ -49,7 +49,9 @@ const config = {
       '/api/profile/addlink',
       '/api/profile/deletelink',
       '/feedback',
-      '/api/feedback'
+      '/api/feedback',
+      '/users/:id',
+      '/api/users/:id/changerole'
     ]
   },
 
