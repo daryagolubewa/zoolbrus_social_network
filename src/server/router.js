@@ -124,7 +124,7 @@ router.get('/users/students', async (req, res) => {
 
 router.post('/profile', async (req, res) => {
   const userProfile = await User.findById(req.body.id);
-  res.send({ userProfile });
+  res.json({userProfile: userProfile});
 });
 
 router.post('/users/id', async (req, res) => {
@@ -144,7 +144,7 @@ router.post('/profile/change', async (req, res) => {
   );
   await user.save();
 
-  res.send(200);
+  res.json(user);
 });
 
 router.post('/profile/addlink', async (req, res) => {
@@ -199,7 +199,6 @@ router.post('/users/:id/changerole', async (req, res) => {
 
 router.get('/isauth', async (req, res, next) => {
   verifyJwtMW
-  console.log(req.user);
   
   res.json(req.user)
 })

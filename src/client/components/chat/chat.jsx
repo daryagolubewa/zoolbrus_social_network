@@ -36,7 +36,9 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-      this.getUsers();
+      setTimeout(async () => {
+        await this.getUsers();
+      }, 1000)
     }
 
     getUsers = async () => {

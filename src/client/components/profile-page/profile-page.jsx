@@ -78,6 +78,7 @@ class Profile extends Component {
 
   addFormLink = (e) => {
     const newLink = e.target.value;
+    console.log(this.state)
     this.setState({ newLink });
   }
 
@@ -121,6 +122,8 @@ class Profile extends Component {
   }
 
   async componentDidMount() {
+    console.log('hjhjh', this.props);
+    
     const fetchFunc = async () => {
       const res = await fetch('/api/profile', {
         method: 'post',
@@ -140,16 +143,18 @@ class Profile extends Component {
         company: fullRes.userProfile.company,
         role: fullRes.userProfile.role
       });
+      console.log(this.state);
+      
       return res;
     };
-    fetchFunc();
+    setTimeout(fetchFunc, 1000)
   }
 
   changeCompany = (company) => {
     this.setState({ company });
   }
 
-  changediscription = (discription) => {
+  changeDiscription = (discription) => {
     this.setState({ discription });
   }
 
@@ -183,8 +188,7 @@ class Profile extends Component {
             <div className="role">
               <p className="whatRole">Ссылки:</p>
               <div className="isRole">
-              {
-                this.state.links.map(elem => 
+              { this.state.links.map(elem => 
                   <div className="profile-page__link">
                     <a href={elem} className="profile-page__view-link">{elem}</a>
                     <Button
@@ -195,9 +199,8 @@ class Profile extends Component {
                     >
                       X
                     </Button>
-                  </div>
-                )
-              }
+                  </div>)
+                }
               { this.renderAddLink() }
               { this.renderAddLinkButton() }
               </div>
