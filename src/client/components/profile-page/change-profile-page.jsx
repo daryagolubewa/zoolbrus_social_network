@@ -59,11 +59,17 @@ class ChangeProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  componentDidMount() {
+    console.log('111111111111111111111111', this.props);
+    
+  }
   changeProfile = async () => {
     const {
       discription,
       company
     } = this.state;
+    console.log(this.props);
+    
     let res = await fetch('/api/profile/change', {
       method: 'post',
       headers: {

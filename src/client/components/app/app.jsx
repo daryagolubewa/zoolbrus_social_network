@@ -35,6 +35,12 @@ import {
 //   posts: selectPosts(state),
 //   isPostsFetching: selectIsPostsFetching(state)
 
+import { selectLoginUser } from '../../redux/selectors/login-selectors';
+
+
+const mapStateToProps = state => ({
+  login: selectLoginUser(state)
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   doRoute: push,
@@ -68,6 +74,37 @@ class App extends Component {
       this.props.postLoginSuccess(userJson);
     }
     fetching()
+  }
+
+  giveMeButtons = () => {
+    if(!this.props.login) {
+      console.log(this.props)
+      return (
+        <div className='button-toolbar enter-buttons'>
+          <Link to={PAGES.signup.path}>
+            <Button className='form-buttons' bsStyle='default'>Зарегистрироваться</Button>
+          </Link>
+          <Link to={PAGES.login.path}>
+            <Button className='form-buttons' bsStyle='default'>Войти</Button>
+          </Link>
+          <Link to={PAGES.chat.path}>
+          <Button>ok</Button></Link>
+        </div>
+      )
+    }
+    else {
+      console.log('dfdf')
+      return (
+        <div className='button-toolbar enter-buttons'>
+          <Link to={PAGES.profile.path}>
+            <Button className='form-buttons' bsStyle='default'>Профиль</Button>
+          </Link>
+          <Link to={PAGES.chat.path}>
+            <Button className='form-buttons' bsStyle='default'>Сообщения</Button>
+          </Link>
+        </div>
+      )
+    }
   }
 
   render() {
@@ -109,16 +146,7 @@ class App extends Component {
                     </div>
                   </Link>
                 </div>
-                <div className='button-toolbar enter-buttons'>
-                  <Link to={PAGES.signup.path}>
-                    <Button className='form-buttons' bsStyle='default'>Зарегистрироваться</Button>
-                  </Link>
-                  <Link to={PAGES.login.path}>
-                    <Button className='form-buttons' bsStyle='default'>Войти</Button>
-                  </Link>
-                  <Link to={PAGES.chat.path}>
-                  <Button>ok</Button></Link>
-                </div>
+                { this.giveMeButtons() }
               </Col>
             </Row>
           </Grid>
@@ -137,7 +165,7 @@ class App extends Component {
 }
 
 const VisibleApp = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
 export default VisibleApp;
