@@ -89,21 +89,21 @@ router.post('/messages', async (req, res) => {
 })
 
 
-// router.get('/seed', async (req, res) => {
-//   for (let i = 0; i < 50; i++) {
-//     const newUsers = new User({
-//       name: faker.name.findName(),
-//       email: faker.internet.email(),
-//       avatar: faker.image.avatar(),
-//       password: faker.internet.password(),
-//       role: 'teacher',
-//       company: faker.company.companyName()
-//     });
-//     await newUsers.save();
-//   }
-//   console.log(1111111111111111)
-//   res.send('dfdf');
-// });
+router.get('/seed', async (req, res) => {
+  for (let i = 0; i < 50; i++) {
+    const newUsers = new User({
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      avatar: faker.image.avatar(),
+      password: faker.internet.password(),
+      role: 'student',
+      company: faker.company.companyName()
+    });
+    await newUsers.save();
+  }
+  console.log(1111111111111111)
+  res.send('dfdf');
+});
 
 router.post('/users/teachers', async (req, res) => {
   const teachers = await User.find({ role: 'teacher' });
@@ -114,7 +114,7 @@ router.post('/users/teachers', async (req, res) => {
 });
 
 router.post('/users/students', async (req, res) => {
-  const students = await User.find({ role: 'student' }).skip(req.body.currentPage).limit(req.body.studentsLimit);
+  const students = await User.find({ role: 'student' }).skip(req.body.currentPage * req.body.studentsLimit).limit(req.body.studentsLimit);
   if (students.length === 0) {
     return res.send(400, 'No students found');
   }

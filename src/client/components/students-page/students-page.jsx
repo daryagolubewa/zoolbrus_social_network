@@ -27,10 +27,11 @@ class StudentsPage extends Component {
     };
   }
 
-  handlePageChange = (page) => {
-    this.setState({
+  handlePageChange = async (page) => {
+    await this.setState({
       currentPage: page
     });
+    this.showStudents();
   };
 
   async componentDidMount() {
