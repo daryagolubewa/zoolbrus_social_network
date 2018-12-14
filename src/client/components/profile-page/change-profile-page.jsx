@@ -107,7 +107,8 @@ class ChangeProfile extends Component {
           placeholder="Введите информацию о себе"
           defaultValue={this.state.discription}
           name="discription"
-          onChange={ this.handleChange }
+          onChange={ this.handleChange } 
+          rows="10"
           />
         </FormGroup>
 
@@ -117,7 +118,7 @@ class ChangeProfile extends Component {
           this.changeProfile();
           this.props.show();
           this.props.changeCompany(this.state.company);
-          this.props.changeDiscription();
+          this.props.changeDiscription(this.state.discription);
         }
         }>
           Сохранить изменения
