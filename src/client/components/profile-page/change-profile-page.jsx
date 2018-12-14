@@ -8,7 +8,27 @@ import {
   FormControl
 } from 'react-bootstrap';
 import Type from 'prop-types';
+import { selectLoginUser } from '../../redux/selectors/login-selectors';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'connected-react-router';
+import {
+  postLoginStartAC,
+  postLoginSuccessAC,
+  postLoginErrorAC
+} from '../../redux/actions/login-actions';
 
+
+const mapStateToProps = state => ({
+  login: selectLoginUser(state)
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  doRoute: push,
+  postLoginStart: postLoginStartAC,
+  postLoginSuccess: postLoginSuccessAC,
+  postLoginError: postLoginErrorAC
+}, dispatch);
 
 function FieldGroup({
   id, label, help, ...props
@@ -23,7 +43,7 @@ function FieldGroup({
 }
 
 
-export default class FormProfilePage extends Component {
+class ChangeProfile extends Component {
   static propTypes = {
     discription: Type.string,
     company: Type.string,
@@ -50,13 +70,13 @@ export default class FormProfilePage extends Component {
         'Content-Type': 'application/json; charset=utf-8'
       },
       body: JSON.stringify({
-        email: 'yasha@lava.ru',
+        id: this.props.login._id,
         discription,
         company
       })
     });
     res = await res.json();
-    this.setState({ company: res });
+    this.setState({ company: res.company, discription: res.discription });
   }
 
   render() {
@@ -87,7 +107,8 @@ export default class FormProfilePage extends Component {
           placeholder="Введите информацию о себе"
           defaultValue={this.state.discription}
           name="discription"
-          onChange={ this.handleChange }
+          onChange={ this.handleChange } 
+          rows="10"
           />
         </FormGroup>
 
@@ -97,7 +118,7 @@ export default class FormProfilePage extends Component {
           this.changeProfile();
           this.props.show();
           this.props.changeCompany(this.state.company);
-          this.props.changeDiscription();
+          this.props.changeDiscription(this.state.discription);
         }
         }>
           Сохранить изменения
@@ -106,3 +127,9 @@ export default class FormProfilePage extends Component {
     );
   }
 }
+
+const ChangeProfilePage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChangeProfile);
+export default ChangeProfilePage;

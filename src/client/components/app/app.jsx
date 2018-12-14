@@ -21,6 +21,9 @@ import { PAGES } from '../../routes/pages';
 // import { selectPosts, selectIsPostsFetching } from '../../redux/selectors/post-selectors';
 import './app.css';
 
+import {
+  postLoginSuccessAC
+} from '../../redux/actions/login-actions';
 
 // const cn = bemClassNameFactory('app');
 //
@@ -34,13 +37,15 @@ import './app.css';
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  doRoute: push
+  doRoute: push,
+  postLoginSuccess: postLoginSuccessAC
 }, dispatch);
 
 
 class App extends Component {
   static propTypes = {
-    doRoute: Type.func.isRequired
+    doRoute: Type.func.isRequired,
+    postLoginSuccess: Type.func.isRequired
   };
 
   // static defaultProps = {
@@ -55,6 +60,15 @@ class App extends Component {
     const { doRoute } = this.props;
     doRoute(path);
   };
+
+  componentDidMount() {
+    let fetching = async () => {
+      const user = await fetch('/api/isauth')
+      const userJson = await user.json();
+      this.props.postLoginSuccess(userJson);
+    }
+    fetching()
+  }
 
   render() {
     const {
@@ -102,11 +116,13 @@ class App extends Component {
                   <Link to={PAGES.login.path}>
                     <Button className='form-buttons' bsStyle='default'>Войти</Button>
                   </Link>
-
+                  <Link to={PAGES.chat.path}>
+                  <Button>ok</Button></Link>
                 </div>
               </Col>
             </Row>
           </Grid>
+
           </header>
               <Grid>
                 <Row>

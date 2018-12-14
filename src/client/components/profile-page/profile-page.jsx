@@ -4,8 +4,31 @@ import {
   Button, Modal, FormGroup, ControlLabel, FormControl, HelpBlock
 } from 'react-bootstrap';
 // import Type from "prop-types";
-import FormProfilePage from './change-profile-page';
-import avatar from '../../public/images/noavatar.png';
+import ChangeProfile from './change-profile-page';
+import noavatar from '../../public/images/noavatar.png';
+import { selectLoginUser } from '../../redux/selectors/login-selectors';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'connected-react-router';
+import {
+  postLoginStartAC,
+  postLoginSuccessAC,
+  postLoginErrorAC
+} from '../../redux/actions/login-actions';
+
+
+
+
+const mapStateToProps = state => ({
+  login: selectLoginUser(state)
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  doRoute: push,
+  postLoginStart: postLoginStartAC,
+  postLoginSuccess: postLoginSuccessAC,
+  postLoginError: postLoginErrorAC
+}, dispatch);
 
 function FieldGroup({
   id, label, help, ...props
@@ -19,7 +42,7 @@ function FieldGroup({
   );
 }
 
-export default class ProfilePage extends Component {
+class Profile extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -31,6 +54,7 @@ export default class ProfilePage extends Component {
     this.state = {
       showChange: false,
       showLink: false,
+      avatar: '',
       links: [],
       appName: '',
       name: '',
@@ -67,7 +91,7 @@ export default class ProfilePage extends Component {
           'Content-Type': 'application/json; charset=utf-8'
         },
         body: JSON.stringify({
-          email: 'yasha@lava.ru',
+          id: this.props.login._id,
           links
         })
       });
@@ -87,7 +111,7 @@ export default class ProfilePage extends Component {
         'Content-Type': 'application/json; charset=utf-8'
       },
       body: JSON.stringify({
-        email: 'yasha@lava.ru',
+        id: this.props.login._id,
         newLinks: links
       })
     });
@@ -103,11 +127,13 @@ export default class ProfilePage extends Component {
         headers: {
           'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.stringify({ email: 'yasha@lava.ru' })
+        body: JSON.stringify({ id: this.props.login._id })
       });
       const fullRes = await res.json();
+      console.log(fullRes)
       this.setState({
-        email: 'yasha@lava.ru',
+        avatar: fullRes.userProfile.avatar,
+        email: fullRes.userProfile.email,
         links: fullRes.userProfile.links,
         name: fullRes.userProfile.name,
         discription: fullRes.userProfile.discription,
@@ -123,16 +149,17 @@ export default class ProfilePage extends Component {
     this.setState({ company });
   }
 
-  changeDiscription = (discription) => {
+  changediscription = (discription) => {
     this.setState({ discription });
   }
 
   render() {
+    // console.log(this.state.avatar)
     return (
       <div className="profile-page">
         <div className="content">
           <div className="sidebar">
-            <img src={ avatar } className="avatar" />
+            <img src={ noavatar } className="avatar" />
             <div className="buttonSend">
               <Button bsStyle="primary">Отправить сообщение</Button>
             </div>
@@ -155,10 +182,11 @@ export default class ProfilePage extends Component {
             </div>
             <div className="role">
               <p className="whatRole">Ссылки:</p>
-              <p className="isRole">
+              <div className="isRole">
               {
-                this.state.links.map(elem => <p>
-                    <a href={elem}>{elem}</a>
+                this.state.links.map(elem => 
+                  <div className="profile-page__link">
+                    <a href={elem} className="profile-page__view-link">{elem}</a>
                     <Button
                     bsStyle="primary"
                     bsSize="small"
@@ -167,18 +195,19 @@ export default class ProfilePage extends Component {
                     >
                       X
                     </Button>
-                  </p>)
+                  </div>
+                )
               }
               { this.renderAddLink() }
               { this.renderAddLinkButton() }
-              </p>
+              </div>
             </div>
           </div>
           <div>
             <Button
             bsStyle="primary"
             bsSize="small"
-            onClick={ this.handleShowChange }
+            onClick={ this.handleShowChange }            
             >
               Редактировать профиль
             </Button>
@@ -189,7 +218,7 @@ export default class ProfilePage extends Component {
             className="chage-profile-form"
             >
               <Modal.Body>
-                <FormProfilePage
+                <ChangeProfile
                 show={ this.handleCloseChange }
                 discription={ this.state.discription }
                 company={ this.state.company }
@@ -236,6 +265,7 @@ export default class ProfilePage extends Component {
           bsStyle="primary"
           bsSize="small"
           onClick={this.handleShowLink}
+          className="profile-page__link-button"
         >
             Добавить ссылку
         </Button>
@@ -246,3 +276,9 @@ export default class ProfilePage extends Component {
     );
   }
 }
+
+const ProfilePage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);
+export default ProfilePage;

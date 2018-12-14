@@ -5,9 +5,6 @@ export async function verifyJwtMW(req, res, next) {
   if (config.jwt.notVerifyPages.includes(req.url) || req.url.includes('/assets/')) {
     next();
   } else {
-    console.log('req method', req.method);
-    console.log('req url', req.url);
-    console.log('Signed Cookies: ', req.signedCookies);
     const token = req.signedCookies[config.jwt.token];
     try {
       const decodedToken = await verifyJWTToken(token);
