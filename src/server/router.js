@@ -91,6 +91,7 @@ router.get('/seed', async (req, res) => {
     const newUsers = new User({
       name: faker.name.findName(),
       email: faker.internet.email(),
+      avatar: faker.image.avatar(),
       password: faker.internet.password(),
       role: 'student',
       company: faker.company.companyName()
@@ -123,8 +124,8 @@ router.post('/profile', async (req, res) => {
   res.send({ userProfile });
 });
 
-router.post('/users/:id', async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
+router.post('/users/id', async (req, res) => {
+  const user = await User.findById(req.body.id);
   res.send({ user });
 });
 
