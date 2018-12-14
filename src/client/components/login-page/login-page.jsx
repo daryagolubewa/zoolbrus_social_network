@@ -63,7 +63,7 @@ class LoginPage extends Component {
       });
       const userJson = await user.json();
       postLoginSuccess(userJson);
-      doRoute(PAGES.home.path);
+      doRoute(PAGES.profile.path);
     } catch (e) {
       postLoginError();
     }

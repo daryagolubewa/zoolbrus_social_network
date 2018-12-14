@@ -26,6 +26,7 @@
 .isRole {
     margin-left: 20px;
     width: 350px;
+    word-wrap: break-word;
 }
 
 .whatRole {
@@ -59,6 +60,6 @@
     margin-top: 4px
 }
 
-.profile-page__view-link {
-    
+.discription-area {
+    height: 50px
 }

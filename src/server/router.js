@@ -41,6 +41,8 @@ router.post('/users/create', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user === null) {
     user = new User({
+      avatar: '',
+      discription: '',
       name: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, saltRounds),
@@ -86,21 +88,22 @@ router.post('/messages', async (req, res) => {
   res.json({ msgs: allMsg.reverse() });
 })
 
-router.get('/seed', async (req, res) => {
-  for (let i = 0; i < 50; i++) {
-    const newUsers = new User({
-      name: faker.name.findName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-      avatar: faker.image.avatar(),
-      role: 'student',
-      company: faker.company.companyName()
-    });
-    await newUsers.save();
-  }
-  console.log(1111111111111111)
-  res.send('seeds are comlete');
-});
+
+// router.get('/seed', async (req, res) => {
+//   for (let i = 0; i < 50; i++) {
+//     const newUsers = new User({
+//       name: faker.name.findName(),
+//       email: faker.internet.email(),
+//       avatar: faker.image.avatar(),
+//       password: faker.internet.password(),
+//       role: 'teacher',
+//       company: faker.company.companyName()
+//     });
+//     await newUsers.save();
+//   }
+//   console.log(1111111111111111)
+//   res.send('dfdf');
+// });
 
 
 router.post('/users/teachers', async (req, res) => {
@@ -120,23 +123,22 @@ router.get('/users/students', async (req, res) => {
 });
 
 router.post('/profile', async (req, res) => {
-  const userProfile = await User.findOne({ email: req.body.email });
+  const userProfile = await User.findById(req.body.id);
   res.send({ userProfile });
 });
 
-router.post('/users/:id', async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
+router.post('/users/id', async (req, res) => {
+  const user = await User.findById(req.body.id);
   res.send({ user });
 });
 
 router.post('/profile/change', async (req, res) => {
-  const user = await User.findOneAndUpdate(
-    {
-      email: req.body.email
-    },
+  const user = await User.findByIdAndUpdate(
+    req.body.id,
     {
       $set: {
-        company: req.body.company
+        company: req.body.company,
+        discription: req.body.discription
       }
     }
   );
@@ -146,10 +148,8 @@ router.post('/profile/change', async (req, res) => {
 });
 
 router.post('/profile/addlink', async (req, res) => {
-  const user = await User.findOneAndUpdate(
-    {
-      email: req.body.email
-    },
+  const user = await User.findByIdAndUpdate(
+    req.body.id,
     {
       $set: {
         links: req.body.links
@@ -161,10 +161,8 @@ router.post('/profile/addlink', async (req, res) => {
 });
 
 router.post('/profile/deletelink', async (req, res) => {
-  const user = await User.findOneAndUpdate(
-    {
-      email: req.body.email
-    },
+  const user = await User.findByIdAndUpdate(
+    req.body.id,
     {
       $set: {
         links: req.body.newLinks
