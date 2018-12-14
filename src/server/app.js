@@ -9,7 +9,6 @@ import socketIO from 'socket.io';
 import config from './config/default';
 import router from './router';
 import { verifyJwtMW } from './middlewares/verify-jwt';
-
 const fetch = require('node-fetch');
 
 

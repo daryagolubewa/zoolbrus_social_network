@@ -15,6 +15,11 @@ export const PAGES = {
     students: {
       name: 'students',
       path: '/users/students'
+    },
+    user: {
+      name: 'user',
+      path: '/users/:id',
+      call: id => `/users/${id}`
     }
   },
   chat: {
@@ -40,10 +45,6 @@ export const PAGES = {
   profile: {
     name: 'profile',
     path: '/profile'
-  },
-  user: {
-    name: 'user',
-    path: '/users/:id'
   },
   API: {
     postLogin: {

@@ -12,6 +12,7 @@ import {
   postLoginErrorAC
 } from '../../redux/actions/login-actions';
 import { selectLoginUser } from '../../redux/selectors/login-selectors';
+import { Panel, Button } from 'react-bootstrap'
 
 const socket = socketIOClient('http://192.168.1.86:3000/');
 
@@ -37,21 +38,6 @@ class Chat extends Component {
     componentDidMount() {
       this.getUsers();
     }
-
-    // fetchUser = async() => {
-    //     let response = await fetch('/api/test', {
-    //         method: 'POST',
-    //         headers: {
-    //           'Accept': 'application/json',
-    //           'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //           sender: this.props.login.loginUser._id
-    //         })
-    //     })
-    //     response = await response.json()
-    //     this.setState({user: response.user})
-    // }
 
     getUsers = async () => {
       let response = await fetch('/api/users');
@@ -88,27 +74,31 @@ class Chat extends Component {
     }
 
     render() {
-      this.getMsgs();
+      let timeout = setInterval(this.getMsgs,2000);
       return (
         <div className='chatContainer'>
             <div className='chatParticipants'>
                 {/* list of opened chats */}
-                <input onKeyDown={ async (e) => { if (e.key == 'Enter') { await this.setState({ user: e.target.value }); } this.fetchUser(); } } type="text"/>
-                { this.state.users.map(item => (<div onClick={ async () => { await this.setState({ receiver: item._id, show: true }); } }>{ item.name }</div>)) }
+                { this.state.users.map(item => (
+                <Panel className='df' onClick={ async () => { await this.setState({ receiver: item._id, show: true }); } }>
+                  <Panel.Body>{ item.name }</Panel.Body>
+                </Panel>)) }
+                {/* { this.state.users.map(item => (<div onClick={ async () => { await this.setState({ receiver: item._id, show: true }); } }>{ item.name }</div>)) } */}
             </div>
             <div className='chatDialog'>
-                {/* list of messages */}
+              <center>
                 <div >
-                    { this.state.msgs.map((item, i) => {
-                      if (item.sender == this.props.login._id) {
-                        return (<SenderMsg text={ this.state.msgs[i].text }/>);
-                      }
+                  { this.state.msgs.map((item, i) => {
+                    if (item.sender == this.props.login._id) {
+                      return (<SenderMsg text={ this.state.msgs[i].text }/>);
+                    }
 
-                      return (<ReceiveMsg text={ this.state.msgs[i].text }/>);
-                    }) }
-                    <input onChange={ this.setMessage } onKeyDown={ (e) => { if (e.key == 'Enter') { this.sendMessage(); } } } type="text"/>
-                    <button onClick={ this.sendMessage } >SEND</button>
+                    return (<ReceiveMsg text={ this.state.msgs[i].text }/>);
+                  }) }
+                  <input placeholder='Type your message' onChange={ this.setMessage } onKeyDown={ (e) => { if (e.key == 'Enter') { this.sendMessage(); } } } type="text"/>
+                  <Button onClick={ this.sendMessage } >SEND</Button>
                 </div>
+              </center>                
             </div>
         </div>
       );
