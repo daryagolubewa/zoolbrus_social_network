@@ -31,7 +31,7 @@ class StudentsPage extends Component {
 
   async componentDidMount() {
     const { showStudentsListSuccess } = this.props;
-    const res = await fetch('http://localhost:3000/api/users/students')
+    const res = await fetch('/api/users/students')
   //     method: 'POST',
   //     headers: { },
   //     body: { }
@@ -48,10 +48,9 @@ class StudentsPage extends Component {
     return (
             <div className='students-page'>
                 <h1>Наши студенты </h1>
-                {/* <button onClick={this.seed}>asdsada</button> */}
               { this.props.studentsList.map(studentsInfo => (<div className="student-mini-profile row">
                   <div className="student-mini-picture col-lg-3">
-                    <Image src={ noavatar } circle className="student-mini-profile-pic"/>
+                    <Image src={ studentsInfo.avatar } circle className="student-mini-profile-pic"/>
                   </div>
                   <div className="student-mini-info">
                     <Col lg={7} className="student-post-block">
@@ -72,6 +71,7 @@ class StudentsPage extends Component {
                         </ListGroup>
                         <Panel.Body className="student-user-description" >
                           { studentsInfo.description }
+                          { studentsInfo.company }
                         </Panel.Body>
                         <ListGroup>
                           <ListGroupItem className="student-connect-button">

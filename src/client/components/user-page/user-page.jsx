@@ -32,7 +32,7 @@ export default class UserPage extends Component {
       discription: '',
       company: '',
       newRole: '',
-      role: 'elbrus'
+      role: ''
     };
   }
 
@@ -55,7 +55,7 @@ export default class UserPage extends Component {
           'Content-Type': 'application/json; charset=utf-8'
         },
         body: JSON.stringify({
-          email: 'yasha@lava.ru',
+          id: this.props.match.params.id,
           role
         })
       });
@@ -70,16 +70,18 @@ export default class UserPage extends Component {
 
   async componentDidMount() {
     const fetchFunc = async () => {
-      const res = await fetch('/api/users/:id', {
+      const res = await fetch('/api/users/id', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.stringify({ email: 'yasha@lava.ru' })
+        body: JSON.stringify({ id: this.props.match.params.id})
       });
       const fullRes = await res.json();
+      console.log(fullRes)
       this.setState({
-        email: 'yasha@lava.ru',
+        avatar: fullRes.user.avatar,
+        email: fullRes.user.email,
         links: fullRes.user.links,
         name: fullRes.user.name,
         discription: fullRes.user.discription,
@@ -92,11 +94,12 @@ export default class UserPage extends Component {
   }
 
   render() {
+    console.log(this.props.match.params.id)
     return (
     <div className="profile-page">
       <div className="content">
         <div className="sidebar">
-          <img src={ avatar } className="avatar" />
+          <img src={ this.state.avatar } className="avatar" />
           <div className="buttonSend">
             <Button bsStyle="primary">Отправить сообщение</Button>
           </div>

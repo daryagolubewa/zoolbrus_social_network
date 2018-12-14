@@ -38,7 +38,6 @@ const config = {
       '/api/users/create',
       '/api/mes',
       '/api/messages',
-      '/users/teachers',
       '/users/students',
       '/api/users/teachers',
       '/api/users/students',
@@ -50,7 +49,8 @@ const config = {
       '/api/profile/deletelink',
       '/feedback',
       '/api/feedback',
-      '/users/:id',
+      '/api/users/id',
+      // /\/users\/\w*/,
       '/api/users/:id/changerole'
     ]
   },
