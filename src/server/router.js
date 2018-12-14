@@ -81,12 +81,12 @@ router.post('/users/create', async (req, res) => {
 // });
 
 
-router.post('/users/teachers', async (req, res) => {
-  const teachers = await User.find({ role: 'teacher' });
-  if (teachers === null) {
-    return res.send(400, 'No teachers found');
+router.post('/users/students', async (req, res) => {
+  const students = await User.find({ role: 'student' }).skip(req.body.currentPage).limit(req.body.studentsLimit);
+  if (students.length === 0) {
+    return res.send(400, 'No students found');
   }
-  return res.json(teachers);
+  return res.json(students);
 });
 
 router.post('/profile', async (req, res) => {
