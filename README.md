@@ -22,6 +22,6 @@
 
 ## Наша команда
 
-* Дарья Голубева - full-stack developer
+* [Дарья Голубева](https://github.com/daryagolubewa) - full-stack developer
 * [Александр Вайнер](https://github.com/AlexVainer) -  full-stack developer
 * [Яков Кузьмин](https://github.com/yack-off) - full-stack developer
