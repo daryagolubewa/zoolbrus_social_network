@@ -6,10 +6,19 @@
 
 ![alt text](https://pp.userapi.com/c846217/v846217724/1519f1/DnVF32qMzTA.jpg)
 
+## Функционал:
+1. Регистрация
+1. Вход (авторизация)
+1. Личнный кабинет пользователя
+1. Изменение информации о пользователе (редактирование профиля)
+1. Список преподавателей/учеников
+1. Профили пользователей
+1. Чат
+
 ## Стек:
 
-* Frontend: JavaScript, React.js, Redux, React Router, React Thunk
-* Backend: Node.js, Express.js, MongoDB, Mongoose, JWT
+* Frontend: JavaScript, React.js, Redux, React Router, React Thunk, socket-io-client(cообщения)
+* Backend: Node.js, Express.js, MongoDB, Mongoose, JWT, socket.io
 
 ## Наша команда
 
